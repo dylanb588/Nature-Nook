@@ -22,11 +22,19 @@ CREATE TABLE "plant" (
     "water" integer NOT NULL
 );
 
+CREATE TABLE "note" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "user",
+    "plant_id" INT REFERENCES "plant",
+    "note" TEXT NOT NULL
+)
+
 CREATE TABLE "follower" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "user"
     "follower_id" INT REFERENCES "user"
 );
+
 
 -- Test plant
 INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
