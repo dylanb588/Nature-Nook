@@ -27,3 +27,7 @@ CREATE TABLE "follower" (
     "user_id" INT REFERENCES "user"
     "follower_id" INT REFERENCES "user"
 );
+
+-- Test plant
+INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
+VALUES (1, 'Snake Plant', 'Sansevieria trifasciata', 'snake_plant.jpg', 'Requires indirect sunlight. Allow soil to dry between waterings.', 'Well-draining soil', 14);
