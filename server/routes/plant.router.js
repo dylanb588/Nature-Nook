@@ -19,6 +19,26 @@ router.get('/', (req, res) => {
   })
 });
 
+
+router.get('/plantID', (req, res) => {
+  const userID = req.user.id;
+  const plantID = req.params.plantID;
+
+  const query = `
+  SELECT * FROM "plant"
+  WHERE "id" = $1
+  AND "user_id" = $2
+  `;
+
+  pool.query(query, [plantID, userID])
+  .then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    res.sendStatus(500);
+    console.log("Error getting plant details", error);
+  })
+})
+
 // POST for adding a new plant
 router.post('/', (req, res) => {
   const userID = req.user.id;
@@ -40,7 +60,7 @@ router.post('/', (req, res) => {
   })
 });
 
-
+// PUT for allowing users to update their plant's info
 router.put('/:plantID', (req, res) => {
   const plantID = req.params.plantID;
   const userID = req.user.id;
@@ -63,6 +83,7 @@ router.put('/:plantID', (req, res) => {
   })
 });
 
+// DELETE allows users to delete plant they post
 router.delete('/:plantID', (req, res) => {
   const plantID = req.params.plantID;
   const userID = req.user.id;
