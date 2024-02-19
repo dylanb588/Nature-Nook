@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
   })
 });
 
-
+// GET for just a single plant's care info
 router.get('/plantID', (req, res) => {
   const userID = req.user.id;
   const plantID = req.params.plantID;
@@ -37,7 +37,7 @@ router.get('/plantID', (req, res) => {
     res.sendStatus(500);
     console.log("Error getting plant details", error);
   })
-})
+});
 
 // POST for adding a new plant
 router.post('/', (req, res) => {
@@ -103,6 +103,6 @@ router.delete('/:plantID', (req, res) => {
     res.sendStatus(500);
     console.log("Error deleting plant", error);
   })
-})
+});
 
 module.exports = router;

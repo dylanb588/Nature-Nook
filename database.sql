@@ -27,7 +27,7 @@ CREATE TABLE "note" (
     "user_id" INT REFERENCES "user",
     "plant_id" INT REFERENCES "plant",
     "note" TEXT NOT NULL
-)
+);
 
 CREATE TABLE "follower" (
     "id" SERIAL PRIMARY KEY,
@@ -35,7 +35,26 @@ CREATE TABLE "follower" (
     "follower_id" INT REFERENCES "user"
 );
 
+CREATE TABLE "message" (
+    "id" SERIAL PRIMARY KEY,
+    "posted_by" INT REFERENCES "user",
+    "message" TEXT NOT NULL,
+    "posted_at" TIMESTAMP
+);
+
+CREATE TABLE "comment" (
+    "id" SERIAL PRIMARY KEY,
+    "message_id" INT REFERENCES "message",
+    "posted_by" INT REFERENCES "user",
+    "comment" TEXT NOT NULL,
+    "posted_at" TIMESTAMP
+);
+
 
 -- Test plant
 INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
 VALUES (1, 'Snake Plant', 'Sansevieria trifasciata', 'snake_plant.jpg', 'Requires indirect sunlight. Allow soil to dry between waterings.', 'Well-draining soil', 14);
+
+-- Test follow
+INSERT INTO "follower" ("user_id", "follower_id")
+VALUES (1, 2);
