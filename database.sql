@@ -7,7 +7,7 @@ CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
 	"username" varchar(80) UNIQUE NOT NULL,
 	"password" varchar(1000) NOT NULL,
-	"email" varchar(100) UNIQUE NOT NULL,
+	"email" varchar(100) UNIQUE,
 	"profile_pic" varchar(300) 
 );
 
