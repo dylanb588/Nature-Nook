@@ -63,4 +63,25 @@ router.put('/:plantID', (req, res) => {
   })
 });
 
+router.delete('/:plantID', (req, res) => {
+  const plantID = req.params.plantID;
+  const userID = req.user.id;
+
+  const query = `
+  DELETE FROM "plant"
+  WHERE "id" = $1
+  AND "user_id" = $2
+  `;
+
+  const values = [plantID, userID];
+
+  pool.query(query, values)
+  .then(() => {
+    res.sendStatus(204);
+  }).catch((error) => {
+    res.sendStatus(500);
+    console.log("Error deleting plant", error);
+  })
+})
+
 module.exports = router;
