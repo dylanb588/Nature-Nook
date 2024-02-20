@@ -23,7 +23,6 @@ function UserPage() {
     <main>
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
-        <p>Your ID is: {user.id}</p>
         <LogOutButton className="btn" />
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
@@ -31,12 +30,14 @@ function UserPage() {
           plants.map(plant => (
           <Card key={plant.id} sx={{ width: 300 }}>
             <CardActionArea>
+              <Link to={`/plantdetails/${plant.id}`}>
               <CardMedia
                 component="img"
                 height="300"
                 image={plant.plant_image}
                 alt={plant.plant_name}
               />
+              </Link>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {plant.plant_name}

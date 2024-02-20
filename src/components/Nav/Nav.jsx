@@ -32,6 +32,10 @@ function Nav() {
               Info Page
             </Link>
 
+            <Link className="navLink" to="/addPlant">
+              Add New Plant
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
