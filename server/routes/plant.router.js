@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 // GET for just a single plant's care info
-router.get('/plantID', (req, res) => {
+router.get('/:plantID', (req, res) => {
   const userID = req.user.id;
   const plantID = req.params.plantID;
 

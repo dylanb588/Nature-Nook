@@ -17,7 +17,8 @@ function* fetchPlants() {
 function* fetchSinglePlant(action) {
     try{
         const plantID = action.payload;
-        const singlePlant = yield axios.get(`/api/plant${plantID}`);
+        console.log('Here be action payload', plantID);
+        const singlePlant = yield axios.get(`/api/plant/${plantID}`);
 
         yield put({ type: 'SET_SELECTED_PLANT', payload: singlePlant.data })
     } catch(error) {
