@@ -7,7 +7,7 @@ function* fetchPlants() {
     
         yield put({
             type: 'SET_PLANTS',
-            payload: plantResponse
+            payload: plantResponse.data
         });
     } catch (error) {
         console.log("Fetch plants error:", error);
