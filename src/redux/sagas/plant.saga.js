@@ -14,8 +14,20 @@ function* fetchPlants() {
     }
 }
 
+function* fetchSinglePlant(action) {
+    try{
+        const plantID = action.payload;
+        const singlePlant = yield axios.get(`/api/plant${plantID}`);
+
+        yield put({ type: 'SET_SELECTED_PLANT', payload: singlePlant.data })
+    } catch(error) {
+        console.log("Error getting single plant", error);
+    }
+}
+
 function* plantSaga() {
     yield takeLatest('FETCH_PLANTS', fetchPlants);
+    yield takeLatest('FETCH_SELECTED_PLANT', fetchSinglePlant);
 }
 
 export default plantSaga;
