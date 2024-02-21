@@ -12,11 +12,8 @@ function PlantDetails() {
     const plants = useSelector((store) => store.selectedPlant);
     const { id } = useParams();
 
-    
-
+    // Pulls the single plant out of the array
     const plant = plants[0];
-
-    // console.log('Here be plant', plant);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
@@ -24,7 +21,7 @@ function PlantDetails() {
 
     return (
         plant ? (
-            <Card sx={{ width: 500, margin: 'auto', padding: 2 }}>
+            <Card sx={{ width: 600, margin: 'auto', padding: 2 }}>
                 <CardContent>
                     <Typography variant="h3" gutterBottom>
                         {plant.plant_name} Details
@@ -46,6 +43,12 @@ function PlantDetails() {
                             onClick={() => history.push(`/plants/${plant.id}/edit`)}
                         >
                             Edit
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="error"
+                        >
+                            Delete
                         </Button>
                     </Stack>
                 </CardContent>

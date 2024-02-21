@@ -26,9 +26,15 @@ function* fetchSinglePlant(action) {
     }
 }
 
+function* deletePlant(action) {
+    yield axios.delete(`/api/plant/${action.payload}`);
+    yield put({type: 'FETCH_PLANTS'});
+}
+
 function* plantSaga() {
     yield takeLatest('FETCH_PLANTS', fetchPlants);
     yield takeLatest('FETCH_SELECTED_PLANT', fetchSinglePlant);
+    yield takeLatest('DELETE_PLANT', deletePlant);
 }
 
 export default plantSaga;

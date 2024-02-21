@@ -23,7 +23,7 @@ router.get('/:plantID', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/:plantID', (req, res) => {
     const userID = req.user.id;
     const plantID = req.params.plantID;
     const note = req.body;
@@ -41,5 +41,9 @@ router.post('/', (req, res) => {
         console.log("Error posting note", error);
     })
 });
+
+router.delete('/:noteID', (req, res) => {
+    
+})
 
 module.exports = router;
