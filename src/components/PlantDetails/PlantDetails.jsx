@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 import { Typography, Button, Card, CardContent, CardMedia, Stack } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function PlantDetails() {
     const dispatch = useDispatch();
@@ -11,42 +12,48 @@ function PlantDetails() {
     const plants = useSelector((store) => store.selectedPlant);
     const { id } = useParams();
 
+    
+
     const plant = plants[0];
+
+    // console.log('Here be plant', plant);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
     }, [id]);
 
-    return(
-        <Card sx={{ width: 500, margin: 'auto', padding: 2 }}>
-            <CardContent>
-            <Typography variant="h3" gutterBottom>
-                {plant.plant_name} Details
-            </Typography>
-            {plant && (
-                <Stack direction="column" spacing={2}>
-                    <Typography variant="h4" component="h4">{plant.scientific_name}</Typography>
+    return (
+        plant ? (
+            <Card sx={{ width: 500, margin: 'auto', padding: 2 }}>
+                <CardContent>
+                    <Typography variant="h3" gutterBottom>
+                        {plant.plant_name} Details
+                    </Typography>
+                    <Stack direction="column" spacing={2}>
+                        <Typography variant="h4" component="h4">{plant.scientific_name}</Typography>
                         <CardMedia
                             component="img"
                             height="580"
                             image={plant.plant_image}
                             alt={plant.plant_name}
                         />
-                    <Typography variant="body1">Care Instructions: {plant.care}</Typography>
-                    <Typography variant="body1">Soil Type: {plant.soil_type}</Typography>
-                    <Typography variant="body1">Water about every {plant.water} days</Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => history.push(`/plants/${plant.id}/edit`)}
-                    >
-                        Edit
-                    </Button>
-                </Stack>
-            )}
-            </CardContent>
-        </Card>
-    )
+                        <Typography variant="body1">{plant.care}</Typography>
+                        <Typography variant="body1">{plant.soil_type}</Typography>
+                        <Typography variant="body1">Water about every {plant.water} days</Typography>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => history.push(`/plants/${plant.id}/edit`)}
+                        >
+                            Edit
+                        </Button>
+                    </Stack>
+                </CardContent>
+            </Card>
+        ) : (
+            <CircularProgress color="success" align="center"/>
+        )
+    );
 }
 
 export default PlantDetails;
