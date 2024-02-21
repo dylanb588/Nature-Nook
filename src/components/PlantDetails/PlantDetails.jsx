@@ -19,6 +19,11 @@ function PlantDetails() {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
     }, [id]);
 
+    function deletePlant(plantID) {
+        dispatch({type: 'DELETE_PLANT', payload: plantID});
+        history.push('/user');
+    }
+
     return (
         plant ? (
             <Card sx={{ width: 600, margin: 'auto', padding: 2 }}>
@@ -47,6 +52,7 @@ function PlantDetails() {
                         <Button
                             variant="contained"
                             color="error"
+                            onClick={()=>deletePlant(plant.id)}
                         >
                             Delete
                         </Button>
