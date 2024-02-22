@@ -13,7 +13,7 @@ router.get('/:plantID', (req, res) => {
         AND "plant_id" = $2;
     `;
 
-    pool.query(query, [userID, plantID]) // Correct order of parameters
+    pool.query(query, [userID, plantID])
         .then(result => {
             res.send(result.rows);
         })
@@ -43,7 +43,7 @@ router.post('/:plantID', (req, res) => {
 });
 
 router.delete('/:noteID', (req, res) => {
-    
+
 })
 
 module.exports = router;

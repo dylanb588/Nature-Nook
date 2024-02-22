@@ -1,30 +1,100 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
-
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
-import Stack from '@mui/material/Stack';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function AddPlant() {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const plants = useSelector((store) => store.plants);
+  const history = useHistory();
+  const [file, setFile] = useState('');
+  const [image, setImage] = useState('');
+  const [uploadedImg, setUpload] = useState('');
+  const [plantInfo, setPlantInfo] = useState({
+    plantName: '',
+    scientificName: '',
+    care: '',
+    soilType: '',
+    water: ''
+    });
+
+  function previewFiles(file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file)
+
+    reader.onloadend = () => {
+      setImage(reader.result);
+    }
+    console.log(image);
+  }
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+    previewFiles(file);
+  }
+
+  const handleSubmit =async ()=> {
+    history.push('/user');
+    let plantObj = {...plantInfo, image: image}
+    const result = await axios.post('/api/plant', 
+    plantObj
+    )
+    try{
+      const uploadedImage = result.data.public_id;
+      setUpload(uploadedImage);
+      
+    }catch(error){
+      console.log(error);
+    }
+    
+  }
+
+  // console.log('Plantinfo:', plantInfo);
 
   return (
     <div>
-      <form>
-        <Stack>
+      <form onSubmit={e => handleSubmit(e)}>
+        <label htmlFor='fileInput'>Upload plant photo here</label>
+          <input type='file' id='fileInput' onChange={e=> handleChange(e)} required
+          accept='image/png, image/jpeg, image/jpg, image/jfif'/>
           <TextField
-            label="Plant Name"
-            variant="outlined"
-            fullWidth
-            value={}
-            onChange={}
-          />
-        </Stack>
+          name="plantName"
+          label="Plant Name"
+          value={plantInfo.plantName}
+          // onChange={handleChange}
+          onChange={(event) => setPlantInfo({...plantInfo, plantName: event.target.value})}
+          required
+        />
+        <TextField
+          name="scientificName"
+          label="Scientific Name"
+          value={plantInfo.scientificName}
+          onChange={(event) => setPlantInfo({...plantInfo, scientificName: event.target.value})}
+          required
+        />
+        <TextField
+          name="care"
+          label="Care"
+          value={plantInfo.care}
+          onChange={(event) => setPlantInfo({...plantInfo, care: event.target.value})}
+          required
+        />
+        <TextField
+          name="soilType"
+          label="Soil Type"
+          value={plantInfo.soilType}
+          onChange={(event) => setPlantInfo({...plantInfo, soilType: event.target.value})}
+          required
+        />
+        <TextField
+          name="water"
+          label="Water"
+          value={plantInfo.water}
+          onChange={(event) => setPlantInfo({...plantInfo, water: event.target.value})}
+          required
+        />
+        <Button type="submit">Upload Plant Info</Button>
       </form>
+      <img src={image} />
     </div>
   );
 }

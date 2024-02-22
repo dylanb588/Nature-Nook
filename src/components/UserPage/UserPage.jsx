@@ -17,7 +17,7 @@ function UserPage() {
 
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
-  }, []);
+  }, [plants]);
 
   return (
     <main>
