@@ -5,9 +5,9 @@ import { TextField, Button } from '@mui/material';
 
 function AddPlant() {
   const history = useHistory();
-  // const [file, setFile] = useState('');
+  const [file, setFile] = useState('');
   const [image, setImage] = useState('');
-  // const [uploadedImg, setUpload] = useState('');
+  const [uploadedImg, setUpload] = useState('');
   const [plantInfo, setPlantInfo] = useState({
     plantName: '',
     scientificName: '',
@@ -28,25 +28,25 @@ function AddPlant() {
 
   const handleChange = (e) => {
     const file = e.target.files[0];
-    // setFile(file);
+    setFile(file);
     previewFiles(file);
   }
 
-  const handleSubmit =async ()=> {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     let plantObj = {...plantInfo, image: image}
     const result = await axios.post('/api/plant', plantObj)
-    // try{
-    //   const uploadedImage = result.data.public_id;
-    //    setUpload(uploadedImage);
-    // }catch(error){
-    //   console.log(error);
-    // }
-    const showAlert = () => {
-      alert('Added new plant!');
-      history.push('/user');
+    try{
+      const uploadedImage = result.data.public_id;
+      setUpload(uploadedImage);
+    }catch(error){
+      console.log(error);
     }
-    showAlert();
-    
+    // const showAlert = () => {
+    //   alert('Added new plant!');
+    // }
+    // showAlert();
+    history.push('/user');
   }
 
   // console.log('Plantinfo:', plantInfo);
@@ -61,7 +61,6 @@ function AddPlant() {
           name="plantName"
           label="Plant Name"
           value={plantInfo.plantName}
-          // onChange={handleChange}
           onChange={(event) => setPlantInfo({...plantInfo, plantName: event.target.value})}
           required
         />
