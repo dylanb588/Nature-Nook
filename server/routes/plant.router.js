@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const cloudinary = require('../cloudinary/cloudinary')
+const { Guid } = require('js-guid');
 
 
 // GET for getting the plants associated with that logged in user
@@ -49,7 +50,7 @@ router.post('/', async(req, res) => {
   await cloudinary.uploader.upload(image,
     {
       upload_preset: 'ml_default',
-      public_id: `${username}plant`,
+      public_id: `${username}plant${Guid.newGuid()}`,
       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp'],
     },
       function(error, result) {
