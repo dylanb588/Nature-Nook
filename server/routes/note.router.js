@@ -65,8 +65,8 @@ router.post('/', (req, res) => {
     })
 });
 
-router.delete('/:noteID', (req, res) => {
-    const noteID = req.params.noteID;
+router.delete('/', (req, res) => {
+    const noteID = req.body;
     const userID = req.user.id;
 
     const query = `

@@ -42,14 +42,8 @@ function AddPlant() {
     }catch(error){
       console.log(error);
     }
-    // const showAlert = () => {
-    //   alert('Added new plant!');
-    // }
-    // showAlert();
     history.push('/user');
   }
-
-  // console.log('Plantinfo:', plantInfo);
 
   return (
     <div>
