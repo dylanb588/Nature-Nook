@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
+import Notes from "../Notes/Notes";
+
 import { Typography, Button, Card, CardContent, CardMedia, Stack } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -26,6 +28,7 @@ function PlantDetails() {
 
     return (
         plant ? (
+            <>
             <Card sx={{ width: 600, margin: 'auto', padding: 2 }}>
                 <CardContent>
                     <Typography variant="h3" gutterBottom>
@@ -59,9 +62,12 @@ function PlantDetails() {
                     </Stack>
                 </CardContent>
             </Card>
+            <Notes />
+            </>
         ) : (
             <CircularProgress color="success" align="center"/>
         )
+        
     );
 }
 

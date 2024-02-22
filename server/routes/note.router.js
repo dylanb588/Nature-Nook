@@ -6,6 +6,9 @@ router.get('/:plantID', (req, res) => {
     const userID = req.user.id;
     const plantID = req.params.plantID; // Extract plantID from request parameters
 
+    console.log('Here is user id', userID);
+    console.log('Here is plantId', plantID);
+
     const query = `
         SELECT *
         FROM "note"

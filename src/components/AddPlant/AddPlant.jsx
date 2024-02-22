@@ -73,7 +73,7 @@ function AddPlant() {
         />
         <TextField
           name="care"
-          label="Care"
+          label="Care Details"
           value={plantInfo.care}
           onChange={(event) => setPlantInfo({...plantInfo, care: event.target.value})}
           required
@@ -87,7 +87,7 @@ function AddPlant() {
         />
         <TextField
           name="water"
-          label="Water"
+          label="Water every ... days"
           value={plantInfo.water}
           onChange={(event) => setPlantInfo({...plantInfo, water: event.target.value})}
           required
