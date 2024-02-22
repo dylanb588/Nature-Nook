@@ -17,7 +17,7 @@ function UserPage() {
 
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
-  }, [plants]);
+  }, []);
 
   return (
     <main>
@@ -26,7 +26,7 @@ function UserPage() {
         <LogOutButton className="btn" />
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
-        {plants ? (
+        {plants?.length > 0 ? (
           plants.map(plant => (
           <Card key={plant.id} sx={{ width: 300 }}>
             <CardActionArea>

@@ -41,59 +41,7 @@ router.get('/:plantID', (req, res) => {
   })
 });
 
-// router.post('/', async (req, res) => {
-//   try {
-//     const { image, plant_name, scientific_name, care, soil_type, water } = req.body;
-//     const username = req.user.username;
-
-//     // Upload image to Cloudinary
-//     const uploadedImage = await cloudinary.uploader.upload(image, {
-//       upload_preset: 'ml_default',
-//       public_id: `${username}plant`,
-//       allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp'],
-//     });
-
-//     // Store plant information in the PostgreSQL database
-//     const query = `
-//       INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
-//       VALUES ($1, $2, $3, $4, $5, $6, $7)
-//     `;
-//     const values = [req.user.id, plant_name, scientific_name, uploadedImage.public_id, care, soil_type, water];
-//     await pool.query(query, values);
-
-//     // Send back the image URL in the response
-//     res.status(200).json({ 
-//       message: 'Plant and image uploaded successfully',
-//       imageUrl: uploadedImage.public_id
-//     });
-//   } catch (err) {
-//     console.error('Error:', err);
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// });
-
-
-// POST for adding a new plant
-// router.post('/', (req, res) => {
-//   const userID = req.user.id;
-//   const { plant_name, scientific_name, plant_image, care, soil_type, water } = req.body;
-
-//   const query = `
-//   INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
-//   VALUES ($1, $2, $3, $4, $5, $6, $7)
-//   `;
-
-//   const values = [userID, plant_name, scientific_name, plant_image, care, soil_type, water];
-
-//   pool.query(query, values)
-//   .then(() => {
-//     res.sendStatus(201);
-//   }).catch((error) => {
-//     res.sendStatus(500);
-//     console.log("Error adding new plant", error);
-//   })
-// });
-
+// POST for new plant's allows user to upload a file of their plant and plant info
 router.post('/', async(req, res) => {
   const {image, plantName, scientificName, care, soilType, water } = req.body;
   const username = req.user.username
@@ -124,17 +72,8 @@ router.post('/', async(req, res) => {
             console.log(error);
             res.sendStatus(500);
           })
-      });
-        // we need to POST the result.url to the 'plant' table
-        // we will make a new insert statement
-
-          
-      // try{
-      //   res.status(200).json(uploadedImage)
-      // }catch(err){
-      //   console.log(err);
-      // }
-})
+      })
+});
 
 
 

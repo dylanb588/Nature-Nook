@@ -16,6 +16,7 @@ function PlantDetails() {
 
     // Pulls the single plant out of the array
     const plant = plants[0];
+    // console.log(plant);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
@@ -62,7 +63,7 @@ function PlantDetails() {
                     </Stack>
                 </CardContent>
             </Card>
-            <Notes />
+            <Notes plant={plant}/>
             </>
         ) : (
             <CircularProgress color="success" align="center"/>
