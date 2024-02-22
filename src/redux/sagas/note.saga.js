@@ -24,15 +24,16 @@ function* addNote(action) {
     }
 }
 
-// function* deleteNote(action) {
-//     yield axios.delete(`/api/note/${action.payload}`);
-//     yield put({type: 'FETCH_NOTES'});
-// }
+function* deleteNote(action) {
+    console.log('Note id', action.payload);
+    yield axios.delete(`/api/note/${action.payload}`);
+    yield put({type: 'FETCH_NOTES'});
+}
 
 function* noteSaga() {
     yield takeLatest('FETCH_NOTES', fetchNotes);
     yield takeLatest('ADD_NOTE', addNote);
-    // yield takeLatest('DELETE_NOTE', deleteNote);
+    yield takeLatest('DELETE_NOTE', deleteNote);
 }
 
 export default noteSaga;

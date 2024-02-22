@@ -34,9 +34,10 @@ function Notes(props) {
         setNote('');
     }
 
-    // function deleteNote(noteID) {
-    //     dispatch({type: 'DELETE_NOTE', payload: noteID})
-    // }
+    function deleteNote(noteID) {
+        console.log(noteID);
+        dispatch({type: 'DELETE_NOTE', payload: noteID})
+    }
 
     return(
         <Container>
@@ -50,7 +51,7 @@ function Notes(props) {
                     </div>
                 ))
             ) : (
-                <CircularProgress color="success" align="center"/>
+                <h3>No Notes</h3>
             )}
             <TextField 
                 name='note'
