@@ -1,34 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-
-
-// router.get('/:plantID', (req, res) => {
-//     const userID = req.user.id;
-//     const plantID = req.params.plantID; // Extract plantID from request parameters
-
-//     console.log('Get userid', userID);
-//     console.log('Get plantId', plantID);
-
-//     const query = `
-//         SELECT *
-//         FROM "note"
-//         WHERE "user_id" = $1
-//         AND "plant_id" = $2;
-//     `;
-
-//     pool.query(query, [userID, plantID])
-//         .then(result => {
-//             res.send(result.rows);
-//         })
-//         .catch(error => {
-//             console.error("Error getting notes", error);
-//             res.sendStatus(500);
-//         });
-// });
-
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const query = `
     SELECT *
@@ -46,7 +23,7 @@ router.get('/', (req, res) => {
     });
 })
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const note = req.body;
 
@@ -67,7 +44,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const noteID = req.params.id;
     const userID = req.user.id;
 
