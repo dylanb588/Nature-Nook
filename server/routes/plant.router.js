@@ -1,12 +1,15 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const cloudinary = require('../cloudinary/cloudinary')
+const cloudinary = require('../cloudinary/cloudinary');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 const { Guid } = require('js-guid');
 
 
 // GET for getting the plants associated with that logged in user
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
   const query = `
   SELECT * FROM "plant"
@@ -23,7 +26,7 @@ router.get('/', (req, res) => {
 });
 
 // GET for just a single plant's care info
-router.get('/:plantID', (req, res) => {
+router.get('/:plantID', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
   const plantID = req.params.plantID;
 
@@ -45,7 +48,7 @@ router.get('/:plantID', (req, res) => {
 });
 
 // POST for new plant's allows user to upload a file of their plant and plant info
-router.post('/', async(req, res) => {
+router.post('/', rejectUnauthenticated, async(req, res) => {
   const {image, plantName, scientificName, care, soilType, water } = req.body;
   const username = req.user.username
   
@@ -81,7 +84,7 @@ router.post('/', async(req, res) => {
 
 
 // PUT for allowing users to update their plant's info
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   const plantID = req.params.id;
   const userID = req.user.id;
   console.log('Here is req.body', req.body);
@@ -107,14 +110,12 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE allows users to delete plant they post
-router.delete('/:plantID', (req, res) => {
+router.delete('/:plantID', rejectUnauthenticated, (req, res) => {
   const plantID = req.params.plantID;
   const userID = req.user.id;
 
   const query = `
-  DELETE FROM "plant"
-  WHERE "id" = $1
-  AND "user_id" = $2
+  
   `;
 
   const values = [plantID, userID];
