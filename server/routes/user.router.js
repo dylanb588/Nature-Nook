@@ -14,6 +14,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/search', async(req, res) => {
+  try{
+    const {query} = req.query;
+    const search = `
+    SELECT "username"
+    FROM "user"
+    WHERE "username" ILIKE $1`
+  
+    const {rows} = await pool.query(search, [`%${query}%`])
+  
+    const usernames = rows.map((row) => row.username);
+  
+    res.send(usernames)
+  } catch(error) {
+    console.log("Error getting usernames", error);
+    res.sendStatus(500);
+  }
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
