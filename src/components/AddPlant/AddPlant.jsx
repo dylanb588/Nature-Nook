@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
+import { Card, CardContent, Typography, Stack, CircularProgress } from '@mui/material';
 
 function AddPlant() {
   const history = useHistory();
@@ -46,8 +47,13 @@ function AddPlant() {
   }
 
   return (
-    <div>
+    <Card sx={{ width: 600, margin: 'auto', padding: 2 }}>
+      <CardContent>
+        <Typography variant="h3" gutterBottom>
+          Add New Plant
+        </Typography>
       <form onSubmit={e => handleSubmit(e)}>
+      <Stack direction="column" spacing={2}>
         <label htmlFor='fileInput'>Upload plant photo here</label>
           <input type='file' id='fileInput' onChange={e=> handleChange(e)} required
           accept='image/png, image/jpeg, image/jpg, image/jfif'/>
@@ -57,39 +63,43 @@ function AddPlant() {
           value={plantInfo.plantName}
           onChange={(event) => setPlantInfo({...plantInfo, plantName: event.target.value})}
           required
-        />
+          />
         <TextField
           name="scientificName"
           label="Scientific Name"
           value={plantInfo.scientificName}
           onChange={(event) => setPlantInfo({...plantInfo, scientificName: event.target.value})}
           required
-        />
+          />
         <TextField
           name="care"
           label="Care Details"
           value={plantInfo.care}
           onChange={(event) => setPlantInfo({...plantInfo, care: event.target.value})}
           required
-        />
+          multiline
+          rows={4}
+          fullWidth
+          />
         <TextField
           name="soilType"
           label="Soil Type"
           value={plantInfo.soilType}
           onChange={(event) => setPlantInfo({...plantInfo, soilType: event.target.value})}
           required
-        />
+          />
         <TextField
           name="water"
           label="Water every ... days"
           value={plantInfo.water}
           onChange={(event) => setPlantInfo({...plantInfo, water: event.target.value})}
           required
-        />
+          />
         <Button type="submit">Upload Plant Info</Button>
+        </Stack>
       </form>
-      <img src={image} />
-    </div>
+      </CardContent>
+      </Card>
   );
 }
 
