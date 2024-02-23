@@ -24,11 +24,10 @@ function* fetchUser() {
   }
 }
 
-function* searchUsers(action) {
+function* searchUsers() {
   try {
-    const search = action.payload;
-    const response = yield axios.get('/api/user/search', search);
-    yield put({type: 'SET_RESULTS', payload: response.data});
+    const response = yield axios.get('/api/user/search');
+    yield put({type: 'SET_USERS', payload: response.data});
   } catch (error) {
     console.log('Error searching users', error);
   }
@@ -36,7 +35,7 @@ function* searchUsers(action) {
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
-  yield takeLatest('SEARCH_USER', searchUsers);
+  yield takeLatest('FETCH_USERS', searchUsers);
 }
 
 export default userSaga;

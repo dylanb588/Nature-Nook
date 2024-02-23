@@ -115,7 +115,9 @@ router.delete('/:plantID', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
 
   const query = `
-  
+  DELETE FROM "plant"
+  WHERE id = $1
+  AND user_id = $2;
   `;
 
   const values = [plantID, userID];

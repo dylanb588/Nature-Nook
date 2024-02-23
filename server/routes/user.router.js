@@ -16,10 +16,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/search', rejectUnauthenticated, (req, res) => {
   const query = `
-  SELECT "username"
+  SELECT "username", "id"
   FROM "user"
-  `
-  
+  `;
+
   pool.query(query)
   .then((result) => {
     res.send(result.rows);
@@ -27,7 +27,7 @@ router.get('/search', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500);
     console.log('Error getting your plants :(', error);
   })
-})
+});
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
