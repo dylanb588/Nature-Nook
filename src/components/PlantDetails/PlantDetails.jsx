@@ -49,7 +49,7 @@ function PlantDetails() {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => history.push(`/plants/${plant.id}/edit`)}
+                            onClick={() => history.push(`/plantdetails/${plant.id}/edit`)}
                         >
                             Edit
                         </Button>

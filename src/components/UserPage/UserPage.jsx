@@ -13,15 +13,18 @@ function UserPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const plants = useSelector((store) => store.plants);
+  const results = useSelector((store) => store.search);
   const [search, setSearch] = useState('');
   console.log(plants);
+
+  console.log(results);
 
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
   }, []);
 
   const handleSearch = () => {
-    
+    dispatch({type: 'SET_RESULTS', payload: search})
   }
 
   return (
@@ -35,7 +38,7 @@ function UserPage() {
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Search other users'
         />
-        <button >Search</button>
+        <button onClick={handleSearch}>Search</button>
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
