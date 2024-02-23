@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import PlantDetails from '../PlantDetails/PlantDetails';
 import AddPlant from '../AddPlant/AddPlant';
 import PlantEdit from '../PlantEdit/PlantEdit';
+import Search from '../Search/Search';
 
 import './App.css';
 
@@ -82,6 +83,13 @@ function App() {
             path="/addPlant"
           >
             <AddPlant />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/search"
+          >
+            <Search />
           </ProtectedRoute>
 
           <ProtectedRoute

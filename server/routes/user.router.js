@@ -14,23 +14,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-router.get('/search', async(req, res) => {
-  try{
-    const {query} = req.query;
-    const searchQuery = `
-    SELECT "username"
-    FROM "user"
-    WHERE "username" ILIKE $1`
+router.get('/search', rejectUnauthenticated, (req, res) => {
+  const query = `
+  SELECT "username"
+  FROM "user"
+  `
   
-    const {rows} = await pool.query(searchQuery, [`%${query}%`])
-  
-    const usernames = rows.map((row) => row.username);
-  
-    res.send(usernames)
-  } catch(error) {
-    console.log("Error getting usernames", error);
+  pool.query(query)
+  .then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
     res.sendStatus(500);
-  }
+    console.log('Error getting your plants :(', error);
+  })
 })
 
 // Handles POST request with new user data

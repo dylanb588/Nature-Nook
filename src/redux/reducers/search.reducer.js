@@ -1,10 +1,7 @@
 const searchUser = (state = [], action) => {
     switch(action.type) {
-        case 'SET_RESULTS':
-            return {
-                ...state,
-                users: action.payload,
-            };
+        case 'SET_USERS':
+            return action.payload;
         default:
             return state;
     }
