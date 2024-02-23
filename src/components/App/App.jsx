@@ -23,6 +23,7 @@ import PlantDetails from '../PlantDetails/PlantDetails';
 import AddPlant from '../AddPlant/AddPlant';
 import PlantEdit from '../PlantEdit/PlantEdit';
 import Search from '../Search/Search';
+import OtherUser from '../OtherUser/OtherUser';
 
 import './App.css';
 
@@ -63,6 +64,14 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/user/:userID"
+          >
+            <OtherUser />
+          </ProtectedRoute>
+
 
           <ProtectedRoute
             exact
@@ -107,7 +116,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to={`/user/${user.id}`} />
               :
               // Otherwise, show the login page
               <LoginPage />

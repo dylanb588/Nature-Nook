@@ -12,10 +12,10 @@ function UserPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const plants = useSelector((store) => store.plants);
-  const results = useSelector((store) => store.search);
 
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
+    return () => dispatch({type: 'CLEAR_PLANTS'})
   }, []);
 
   return (

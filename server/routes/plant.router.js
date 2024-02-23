@@ -25,8 +25,27 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
+// GETS the user page of a different user
+router.get('/:userID', rejectUnauthenticated, (req, res) => {
+  const { userID } = req.params;
+  console.log('Here is userID', userID);
+  
+  const query = `
+    SELECT * FROM "plant"
+    WHERE "user_id" = $1
+  `;
+
+  pool.query(query, [userID])
+    .then((result) => {
+      res.send(result.rows);
+    }).catch((error) => {
+      res.sendStatus(500);
+      console.log('Error getting plants:', error);
+    });
+});
+
 // GET for just a single plant's care info
-router.get('/:plantID', rejectUnauthenticated, (req, res) => {
+router.get('/details/:plantID', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
   const plantID = req.params.plantID;
 

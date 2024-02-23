@@ -18,11 +18,23 @@ function* fetchSinglePlant(action) {
     try{
         const plantID = action.payload;
         console.log('Here be action payload', plantID);
-        const singlePlant = yield axios.get(`/api/plant/${plantID}`);
+        const singlePlant = yield axios.get(`/api/plant/details/${plantID}`);
 
         yield put({ type: 'SET_SELECTED_PLANT', payload: singlePlant.data })
     } catch(error) {
         console.log("Error getting single plant", error);
+    }
+}
+
+function* fetchOtherPlants(action) {
+    try{
+        console.log('Here is action.payload', action.payload);
+        const userID = action.payload;
+        console.log(userID);
+        const response = yield axios.get(`/api/plant/${userID}`);
+        yield put({type: 'SET_PLANTS', payload: response.data});
+    } catch(error) {
+        console.log('Error getting other plants', error);
     }
 }
 
@@ -49,6 +61,7 @@ function* plantSaga() {
     yield takeLatest('FETCH_SELECTED_PLANT', fetchSinglePlant);
     yield takeLatest('DELETE_PLANT', deletePlant);
     yield takeLatest('EDIT_PLANT', editPlant);
+    yield takeLatest('FETCH_OTHER_PLANTS', fetchOtherPlants);
 }
 
 export default plantSaga;

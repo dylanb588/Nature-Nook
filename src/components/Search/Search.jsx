@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import { Link } from 'react-router-dom'
 
 function Search() {
     const users = useSelector((store)  => store.search);
@@ -23,7 +24,9 @@ function Search() {
                 {users.filter((user) => {
                     return search.toLowerCase() === '' ? user : user.username.toLowerCase().includes(search);
                 }).map((user) => (
-                    <li key={user.id}>{user.username}</li>
+                    <Link key={user.id}  to={`/user/${user.id}`}>
+                        <li>{user.username}</li>
+                    </Link>
                 ))}
             </ul>
         </div>
