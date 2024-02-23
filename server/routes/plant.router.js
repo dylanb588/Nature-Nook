@@ -27,6 +27,8 @@ router.get('/:plantID', (req, res) => {
   const userID = req.user.id;
   const plantID = req.params.plantID;
 
+  console.log('Plant details id', plantID);
+
   const query = `
   SELECT * FROM "plant"
   WHERE "id" = $1
@@ -79,18 +81,21 @@ router.post('/', async(req, res) => {
 
 
 // PUT for allowing users to update their plant's info
-router.put('/:plantID', (req, res) => {
-  const plantID = req.params.plantID;
+router.put('/:id', (req, res) => {
+  const plantID = req.params.id;
   const userID = req.user.id;
-  const { plant_name, scientific_name, plant_image, care, soil_type, water } = req.body;
+  console.log('Here is req.body', req.body);
+  console.log('Here userid', userID);
+  console.log('Here is plantID,', plantID);
+  const { plant_name, scientific_name, care, soil_type, water } = req.body;
 
   const query = `
   UPDATE "plant"
-  SET "plant_name" = $1, "scientific_name" = $2, "plant_image" = $3, "care" = $4, "soil_type" = $5, "water" = $6
-  WHERE "id" = $7 AND "user_id" = $8
+  SET "plant_name" = $1, "scientific_name" = $2, "care" = $3, "soil_type" = $4, "water" = $5
+  WHERE "id" = $6 AND "user_id" = $7
   `;
 
-  const values = [plant_name, scientific_name, plant_image, care, soil_type, water, plantID, userID];
+  const values = [plant_name, scientific_name, care, soil_type, water, plantID, userID];
 
   pool.query(query, values)
   .then(() => {

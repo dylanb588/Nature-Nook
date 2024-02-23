@@ -26,6 +26,19 @@ function* fetchSinglePlant(action) {
     }
 }
 
+function* editPlant(action) {
+    try {
+        console.log('Here be the edit', action.payload);
+        const { id, plant_name, scientific_name, care, soil_type, water } = action.payload;
+        yield axios.put(`/api/plant/${id}`, { plant_name, scientific_name, care, soil_type, water })
+        yield put({type: 'FETCH_PLANTS'})
+    } catch (error) {
+        console.log('Error editing plant', error);
+    }
+}
+
+
+
 function* deletePlant(action) {
     yield axios.delete(`/api/plant/${action.payload}`);
     yield put({type: 'FETCH_PLANTS'});
@@ -35,6 +48,7 @@ function* plantSaga() {
     yield takeLatest('FETCH_PLANTS', fetchPlants);
     yield takeLatest('FETCH_SELECTED_PLANT', fetchSinglePlant);
     yield takeLatest('DELETE_PLANT', deletePlant);
+    yield takeLatest('EDIT_PLANT', editPlant);
 }
 
 export default plantSaga;

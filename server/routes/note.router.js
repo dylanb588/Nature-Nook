@@ -71,9 +71,6 @@ router.delete('/:id', (req, res) => {
     const noteID = req.params.id;
     const userID = req.user.id;
 
-    console.log('here is note id', noteID);
-    console.log('Here is userid', userID);
-
     const query = `
     DELETE FROM "note"
     WHERE "id" = $1

@@ -39,9 +39,9 @@ function PlantEdit() {
     const handleSubmit = (event) => {
         event.preventDefault();
         // Dispatch action to update plant details
-        dispatch({ type: 'UPDATE_PLANT', payload: editedPlant });
+        dispatch({ type: 'EDIT_PLANT', payload: editedPlant });
         // Redirect user to plant details page
-        history.push(`/plantdetails/${id}`);
+        history.push('/user');
     };
 
     return (

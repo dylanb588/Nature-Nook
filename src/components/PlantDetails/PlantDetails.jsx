@@ -13,6 +13,7 @@ function PlantDetails() {
     const history = useHistory();
     const plants = useSelector((store) => store.selectedPlant);
     const { id } = useParams();
+    console.log('Plant id', id);
 
     // Pulls the single plant out of the array
     const plant = plants[0];
