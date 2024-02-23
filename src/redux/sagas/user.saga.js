@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+function* searchUsers(action) {
+  try {
+    const search = action.payload;
+    const response = yield axios.get('/api/user/search', search);
+    yield put({type: 'SET_RESULTS', payload: response.data});
+  } catch (error) {
+    console.log('Error searching users', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('SEARCH_USER', searchUsers);
 }
 
 export default userSaga;

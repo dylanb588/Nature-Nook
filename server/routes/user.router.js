@@ -17,12 +17,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/search', async(req, res) => {
   try{
     const {query} = req.query;
-    const search = `
+    const searchQuery = `
     SELECT "username"
     FROM "user"
     WHERE "username" ILIKE $1`
   
-    const {rows} = await pool.query(search, [`%${query}%`])
+    const {rows} = await pool.query(searchQuery, [`%${query}%`])
   
     const usernames = rows.map((row) => row.username);
   

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom'
@@ -13,17 +13,29 @@ function UserPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const plants = useSelector((store) => store.plants);
+  const [search, setSearch] = useState('');
   console.log(plants);
 
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
   }, []);
 
+  const handleSearch = () => {
+    
+  }
+
   return (
     <main>
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
         <LogOutButton className="btn" />
+        <input
+          type='text'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder='Search other users'
+        />
+        <button >Search</button>
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
