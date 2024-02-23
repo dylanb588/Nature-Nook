@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom'
@@ -9,36 +9,20 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const plants = useSelector((store) => store.plants);
   const results = useSelector((store) => store.search);
-  const [search, setSearch] = useState('');
-  console.log(plants);
-
-  console.log(results);
 
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
   }, []);
-
-  const handleSearch = () => {
-    dispatch({type: 'SET_RESULTS', payload: search})
-  }
 
   return (
     <main>
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
         <LogOutButton className="btn" />
-        <input
-          type='text'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder='Search other users'
-        />
-        <button onClick={handleSearch}>Search</button>
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
@@ -69,5 +53,4 @@ function UserPage() {
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;
