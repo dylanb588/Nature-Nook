@@ -24,6 +24,7 @@ import AddPlant from '../AddPlant/AddPlant';
 import PlantEdit from '../PlantEdit/PlantEdit';
 import Search from '../Search/Search';
 import OtherUser from '../OtherUser/OtherUser';
+import MessageBoard from '../MessageBoard/MessageBoard';
 
 import './App.css';
 
@@ -99,6 +100,13 @@ function App() {
             path="/search"
           >
             <Search />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/message"
+          >
+            <MessageBoard />
           </ProtectedRoute>
 
           <ProtectedRoute

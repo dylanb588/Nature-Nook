@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* fetchMessage() {
     try{
-        const response = yield axios.get('/api/plant');
+        const response = yield axios.get('/api/message');
     
         yield put({
             type: 'SET_MESSAGE',
