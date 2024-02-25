@@ -19,7 +19,25 @@ const {
         console.error("Error getting notes", error);
         res.sendStatus(500);
     });
-})
+});
+
+  router.post('/', rejectUnauthenticated, (req, res) => {
+    const userID = req.user.id;
+    const message = req.body;
+
+    const query = `
+    INSERT INTO "message" ("posted_by", "message", "posted_at")
+    VALUES ($1, $2, NOW());
+    `
+
+    pool.query(query, [userID, message])
+    .then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        console.log('Error posting message', error);
+        res.sendStatus(500);
+    })
+  })
 
 
 

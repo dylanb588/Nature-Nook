@@ -15,6 +15,7 @@ const userRouter = require('./routes/user.router');
 const plantRouter = require('./routes/plant.router');
 const followerRouter = require('./routes/follower.router');
 const noteRouter = require('./routes/note.router');
+const messageRouter = require('./routes/message.router');
 
 // Express Middleware
 app.use(cors());
@@ -34,6 +35,7 @@ app.use('/api/user', userRouter);
 app.use('/api/plant', plantRouter);
 app.use('/api/follower', followerRouter);
 app.use('/api/note', noteRouter);
+app.use('/api/message', messageRouter);
 
 // Listen Server & Port
 app.listen(PORT, () => {
