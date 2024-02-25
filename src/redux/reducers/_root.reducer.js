@@ -5,6 +5,7 @@ import plants from './plant.reducer';
 import selectedPlant from './selectedPlant.reducer';
 import notes from './note.reducer';
 import search from './search.reducer';
+import message from './message.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   plants, // Get the plants for that logged in user
   selectedPlant,
   notes,
-  search
+  search,
+  message
 });
 
 export default rootReducer;
