@@ -7,8 +7,9 @@ const {
 
   router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `
-    SELECT *
-    FROM "message";
+    SELECT message.*, "user".username
+    FROM "message"
+    INNER JOIN "user" ON message.posted_by = "user".id;
     `;
 
     pool.query(query)
