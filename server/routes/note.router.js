@@ -5,6 +5,7 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
+// GETS the notes assoicated to that plant and user.
 router.get('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const query = `
@@ -22,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     });
 })
-
+//Allows a user to POST a new note on a plant.
 router.post('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const note = req.body;
@@ -43,7 +44,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.log("Error posting note", error);
     })
 });
-
+// Allows a user to delete a note on that plant.
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const noteID = req.params.id;
     const userID = req.user.id;

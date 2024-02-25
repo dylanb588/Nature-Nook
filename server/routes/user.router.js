@@ -14,6 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// GETS the list of user's for the search page.
 router.get('/search', rejectUnauthenticated, (req, res) => {
   const query = `
   SELECT "username", "id"

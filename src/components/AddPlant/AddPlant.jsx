@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
-import { Card, CardContent, Typography, Stack, CircularProgress } from '@mui/material';
+import { Card, CardContent, Typography, Stack } from '@mui/material';
 
 function AddPlant() {
   const history = useHistory();
@@ -56,7 +56,7 @@ function AddPlant() {
       <Stack direction="column" spacing={2}>
         <label htmlFor='fileInput'>Upload plant photo here</label>
           <input type='file' id='fileInput' onChange={e=> handleChange(e)} required
-          accept='image/png, image/jpeg, image/jpg, image/jfif'/>
+          accept='image/png, image/jpeg, image/jpg, image/jfif, image/webp' />
           <TextField
           name="plantName"
           label="Plant Name"
