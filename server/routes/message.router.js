@@ -28,7 +28,7 @@ const {
     const query = `
     INSERT INTO "message" ("posted_by", "message", "posted_at")
     VALUES ($1, $2, NOW());
-    `
+    `;
 
     pool.query(query, [userID, message])
     .then(result => {
@@ -36,8 +36,8 @@ const {
     }).catch(error => {
         console.log('Error posting message', error);
         res.sendStatus(500);
-    })
-  })
+    });
+  });
 
 
 
