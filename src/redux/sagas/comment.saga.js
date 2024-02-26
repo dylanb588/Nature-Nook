@@ -1,9 +1,11 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* fetchComments(){
+function* fetchComments(action){
     try{
-        const response = yield axios.get('/api/comment');
+        const id = action.payload;
+        console.log(id);
+        const response = yield axios.get(`/api/comment/${id}`);
     
         yield put({
             type: 'SET_COMMENT',

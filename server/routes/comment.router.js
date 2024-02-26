@@ -6,14 +6,15 @@ const {
   } = require('../modules/authentication-middleware');
 
   // GETS the comments for that message.
-  router.get('/', rejectUnauthenticated, (req, res) => {
+  router.get('/:messageID', rejectUnauthenticated, (req, res) => {
+    const id = req.params.id;
     const query = `
     SELECT *
     FROM "comment"
     WHERE "message_id" = $1
     `;
 
-    pool.query(query)
+    pool.query(query, [id])
     .then(result => {
         res.send(result.rows);
     })
@@ -24,10 +25,24 @@ const {
 });
 // POST for adding new comments to a message
 router.post('/', rejectUnauthenticated, (req, res) => {
+    const userID = req.user.id;
+    const comment = req.body;
 
+    const query = `
+    INSERT INTO "message" ("message_id", "posted_by", "comment", "posted_at")
+    VALUES ($1, $2, $3, NOW());
+    `;
+
+    pool.query(query, [userID])
+    .then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        res.sendStatus(500);
+        console.log("Error posting note", error);
+    })
 });
 
-router.delete('/', rejectUnauthenticated, (req, res) => {
+router.delete('/delete/commentID', rejectUnauthenticated, (req, res) => {
 
 });
 
