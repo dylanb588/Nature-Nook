@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { Card, CardContent, Typography } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function Comments(){
@@ -14,9 +15,18 @@ function Comments(){
     const message = messages[0];
 
     useEffect(() => {
-        dispatch({type: 'FETCH_SINGLE_MESSAGE', payload: messageID})
-        dispatch({type: 'FETCH_COMMENT', payload: messageID})
+        dispatch({type: 'FETCH_SINGLE_MESSAGE', payload: messageID});
+        dispatch({type: 'FETCH_COMMENT', payload: messageID});
     }, []);
+
+    function addComment() {
+        const commentObject = {
+            message_id: message.id,
+            comment: newComment
+        };
+        dispatch({type: 'ADD_COMMENT', payload: commentObject});
+        setNewComment('');
+    }
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -34,7 +44,6 @@ function Comments(){
 
     return(
         <>
-        <h1>Comments!</h1>
         {message ? (
             <Card key={message.id}>
             <CardContent>
@@ -49,6 +58,15 @@ function Comments(){
             ) : (
                 <CircularProgress color="success" align="center"/>
             )}
+        <TextField 
+            name='comment'
+            label='Add a Comment'
+            value={newComment}
+            onChange={(event) => setNewComment(event.target.value)}
+            style={{width: 1000}}
+            required
+        />
+        <Button onClick={() => addComment()}>Post Comment</Button>
         </>
     )
 }

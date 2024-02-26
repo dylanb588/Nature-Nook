@@ -29,16 +29,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     const comment = req.body;
 
     const query = `
-    INSERT INTO "message" ("message_id", "posted_by", "comment", "posted_at")
+    INSERT INTO "comment" ("message_id", "posted_by", "comment", "posted_at")
     VALUES ($1, $2, $3, NOW());
     `;
 
-    pool.query(query, [userID])
+    pool.query(query, [comment.message_id, userID, comment.comment])
     .then(result => {
         res.sendStatus(201);
     }).catch(error => {
         res.sendStatus(500);
-        console.log("Error posting note", error);
+        console.log("Error posting comment", error);
     })
 });
 
