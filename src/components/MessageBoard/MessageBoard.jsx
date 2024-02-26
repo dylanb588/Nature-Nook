@@ -54,8 +54,8 @@ function MessageBoard(props){
         <div>
         {messages.map((message) => ( 
             <Card key={message.id}>
-                <CardContent onClick={() => goToMessageComments(message.id)}>
-                    <Typography variant="body1">
+                <CardContent>
+                    <Typography onClick={() => goToMessageComments(message.id)} variant="body1">
                         {message.message}
                     </Typography>
                     <Typography variant="caption" color="textSecondary">

@@ -31,6 +31,10 @@ function Comments(props){
         setNewComment('');
     }
 
+    function deleteComment(commentID) {
+        dispatch({type: 'DELETE_COMMENT', payload: commentID})
+    }
+
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
@@ -71,7 +75,7 @@ function Comments(props){
                         Posted by: {comment.username} at {formatDate(comment.posted_at)}
                     </Typography>
                     {userID === comment.posted_by && (
-                        <IconButton aria-label="delete">
+                        <IconButton onClick={() => deleteComment(comment.id)} aria-label="delete">
                             <DeleteIcon />
                         </IconButton>
                     )}
