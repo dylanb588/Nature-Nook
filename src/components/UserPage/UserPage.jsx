@@ -16,7 +16,7 @@ function UserPage() {
   useEffect(() => {
     dispatch({type: 'FETCH_PLANTS'})
     return () => dispatch({type: 'CLEAR_PLANTS'})
-  }, []);
+  }, [dispatch]);
 
   return (
     <main>

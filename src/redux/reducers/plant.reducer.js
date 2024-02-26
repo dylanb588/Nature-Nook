@@ -3,7 +3,7 @@ const plantReducer = (state = [], action) => {
         case 'SET_PLANTS':
             return action.payload;
         case 'CLEAR_PLANTS':
-            return state;
+            return [];
         default:
             return state;
     }

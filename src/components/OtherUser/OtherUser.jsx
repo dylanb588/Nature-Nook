@@ -17,7 +17,7 @@ function OtherUser() {
     useEffect(() => {
       dispatch({type: 'FETCH_OTHER_PLANTS', payload: userID})
       return () => dispatch({type: 'CLEAR_PLANTS'})
-    }, []);
+    }, [dispatch]);
 
     return (
     <main>
