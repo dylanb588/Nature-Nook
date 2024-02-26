@@ -4,7 +4,7 @@ const router = express.Router();
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
-
+  // GETS the messages for the message board and getting the username of who posted it
   router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `
     SELECT message.*, "user".username
@@ -21,7 +21,7 @@ const {
         res.sendStatus(500);
     });
 });
-
+// Allows a user to post a new message
   router.post('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const message = req.body;
@@ -40,7 +40,7 @@ const {
         res.sendStatus(500);
     });
   });
-
+// Allows a user to delete a message
   router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const messageID = req.params.id;

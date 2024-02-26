@@ -21,6 +21,14 @@ const {
         console.error("Error getting comments", error);
         res.sendStatus(500);
     });
-})
+});
+// POST for adding new comments to a message
+router.post('/', rejectUnauthenticated, (req, res) => {
+
+});
+
+router.delete('/', rejectUnauthenticated, (req, res) => {
+
+});
 
 module.exports = router;

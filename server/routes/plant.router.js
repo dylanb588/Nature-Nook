@@ -5,6 +5,7 @@ const cloudinary = require('../cloudinary/cloudinary');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+// Makes unquie string for file upload.
 const { Guid } = require('js-guid');
 
 
