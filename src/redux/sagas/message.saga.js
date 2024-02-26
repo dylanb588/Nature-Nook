@@ -14,6 +14,17 @@ function* fetchMessage() {
     }
 }
 
+function* fetchSingleMessage(action) {
+    try{
+        const messageID = action.payload;
+        const response = yield axios.get(`/api/message/${messageID}`);
+
+        yield put({ type: 'SET_SELECTED_MESSAGE', payload: response.data })
+    } catch(error) {
+        console.log("Error getting single message", error);
+    }
+}
+
 function* addMessage(action) {
     try {
         console.log('Message saga', action.payload);
@@ -33,6 +44,7 @@ function* deleteMessage(action) {
 
 function* messageSaga() {
     yield takeLatest('FETCH_MESSAGE', fetchMessage);
+    yield takeLatest('FETCH_SINGLE_MESSAGE', fetchSingleMessage);
     yield takeLatest('ADD_MESSAGE', addMessage);
     yield takeLatest('DELETE_MESSAGE', deleteMessage);
 }
