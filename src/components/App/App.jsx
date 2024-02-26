@@ -25,6 +25,7 @@ import PlantEdit from '../PlantEdit/PlantEdit';
 import Search from '../Search/Search';
 import OtherUser from '../OtherUser/OtherUser';
 import MessageBoard from '../MessageBoard/MessageBoard';
+import Comments from '../Comments/Comments';
 
 import './App.css';
 
@@ -94,7 +95,7 @@ function App() {
           >
             <AddPlant />
           </ProtectedRoute>
-
+          
           <ProtectedRoute
             exact
             path="/search"
@@ -107,6 +108,13 @@ function App() {
             path="/message"
           >
             <MessageBoard user={user}/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/comments/:messageID"
+          >
+            <Comments />
           </ProtectedRoute>
 
           <ProtectedRoute

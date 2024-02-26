@@ -5,6 +5,7 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
+  // GETS the comments for that message.
   router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `
     SELECT *
