@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom';
 import { Card, CardContent, Typography } from '@mui/material';
 import { TextField, Button } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-function Comments(){
+function Comments(props){
     const comments = useSelector((store) => store.comment);
+    const userID = props.user.id;
     const messages = useSelector((store) => store.selectedMessage);
     const [newComment, setNewComment] = useState('');
     const dispatch = useDispatch();
@@ -58,6 +61,23 @@ function Comments(){
             ) : (
                 <CircularProgress color="success" align="center"/>
             )}
+            {comments.map((comment) => ( 
+            <Card key={comment.id}>
+                <CardContent>
+                    <Typography variant="body1">
+                        {comment.comment}
+                    </Typography>
+                    <Typography variant="caption" color="textSecondary">
+                        Posted by: {comment.username} at {formatDate(comment.posted_at)}
+                    </Typography>
+                    {userID === comment.posted_by && (
+                        <IconButton aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+                    )}
+                </CardContent>
+            </Card>
+        ))}
         <TextField 
             name='comment'
             label='Add a Comment'

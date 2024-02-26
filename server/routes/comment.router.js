@@ -7,14 +7,14 @@ const {
 
   // GETS the comments for that message.
   router.get('/:messageID', rejectUnauthenticated, (req, res) => {
-    const id = req.params.id;
+    const messageID = req.params.messageID;
     const query = `
     SELECT *
     FROM "comment"
-    WHERE "message_id" = $1
+    WHERE "message_id" = $1;
     `;
 
-    pool.query(query, [id])
+    pool.query(query, [messageID])
     .then(result => {
         res.send(result.rows);
     })

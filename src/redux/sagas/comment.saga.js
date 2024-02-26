@@ -3,9 +3,8 @@ import axios from 'axios';
 
 function* fetchComments(action){
     try{
-        const id = action.payload;
-        console.log(id);
-        const response = yield axios.get(`/api/comment/${id}`);
+        const messageID = action.payload;
+        const response = yield axios.get(`/api/comment/${messageID}`);
     
         yield put({
             type: 'SET_COMMENT',
