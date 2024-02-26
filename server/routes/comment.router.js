@@ -42,8 +42,23 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.delete('/delete/commentID', rejectUnauthenticated, (req, res) => {
+router.delete('/delete/:commentID', rejectUnauthenticated, (req, res) => {
+    const userID = req.user.id;
+    const commentID = req.params.commentID;
 
+    const query = `
+    DELETE FROM "comment"
+    WHERE "id" = $1
+    AND "posted_by" = $2;
+    `
+
+    pool.query(query, [commentID, userID])
+    .then(result => {
+        res.sendStatus(204);
+    }).catch(error => {
+        res.sendStatus(500);
+        console.log("Error deleting comment", error);
+    })
 });
 
 module.exports = router;
