@@ -14,8 +14,20 @@ function* fetchMessage() {
     }
 }
 
+function* addMessage(action) {
+    try {
+
+        yield axios.post(`/api/message`, action.payload);
+        yield put({type: 'FETCH_MESSAGE'});
+    } catch(error) {
+        console.log('Error adding note', error);
+    }
+}
+
+
 function* messageSaga() {
     yield takeLatest('FETCH_MESSAGE', fetchMessage);
+    yield takeLatest('ADD_MESSAGE', addMessage);
 }
 
 export default messageSaga;
