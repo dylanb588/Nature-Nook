@@ -6,6 +6,7 @@ import selectedPlant from './selectedPlant.reducer';
 import notes from './note.reducer';
 import search from './search.reducer';
 import message from './message.reducer';
+import comment from './comment.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   selectedPlant,
   notes,
   search,
-  message
+  message,
+  comment
 });
 
 export default rootReducer;
