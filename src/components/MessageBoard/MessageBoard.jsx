@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function MessageBoard(props){
@@ -12,6 +13,7 @@ function MessageBoard(props){
     const userID = props.user.id;
     const [newMessage, setNewMessage] = useState('');
     const dispatch = useDispatch();
+    const history = useHistory();
 
 
 
@@ -30,6 +32,9 @@ function MessageBoard(props){
     function deleteMessage(messageID) {
         dispatch({type: 'DELETE_MESSAGE', payload: messageID});
     }
+    const goToMessageComments = (messageId) => {
+        history.push(`/comments/${messageId}`);
+    };
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -49,7 +54,7 @@ function MessageBoard(props){
         <div>
         {messages.map((message) => ( 
             <Card key={message.id}>
-                <CardContent>
+                <CardContent onClick={() => goToMessageComments(message.id)}>
                     <Typography variant="body1">
                         {message.message}
                     </Typography>
@@ -57,7 +62,9 @@ function MessageBoard(props){
                         Posted by: {message.username} at {formatDate(message.posted_at)}
                     </Typography>
                     {userID === message.posted_by && (
-                        <Button onClick={() => deleteMessage(message.id)}>Delete</Button>
+                        <IconButton onClick={() => deleteMessage(message.id)} aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
                     )}
                 </CardContent>
             </Card>
