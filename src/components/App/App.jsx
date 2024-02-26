@@ -106,7 +106,7 @@ function App() {
             exact
             path="/message"
           >
-            <MessageBoard />
+            <MessageBoard user={user}/>
           </ProtectedRoute>
 
           <ProtectedRoute

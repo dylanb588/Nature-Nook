@@ -41,6 +41,27 @@ const {
     });
   });
 
+  router.delete('/', rejectUnauthenticated, (req, res) => {
+    const userID = req.user.id;
+    const messageID = req.body;
+  
+    const query = `
+    DELETE FROM "message"
+    WHERE id = $1
+    AND user_id = $2;
+    `;
+  
+    const values = [messageID, userID];
+  
+    pool.query(query, values)
+    .then(() => {
+      res.sendStatus(204);
+    }).catch((error) => {
+      res.sendStatus(500);
+      console.log("Error deleting message", error);
+    })
+  });
+
 
 
 

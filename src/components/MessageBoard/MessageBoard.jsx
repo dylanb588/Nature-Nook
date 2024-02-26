@@ -3,12 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Card, CardContent, Typography } from '@mui/material';
 import { useState } from 'react';
 import { TextField, Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function MessageBoard(){
+function MessageBoard(props){
     const messages = useSelector((store) => store.message);
+    const userID = props.user.id;
     const [newMessage, setNewMessage] = useState('');
     const dispatch = useDispatch();
+
+
 
     useEffect(() => {
         dispatch({type: 'FETCH_MESSAGE'})
@@ -37,9 +42,9 @@ function MessageBoard(){
     };
 
     return(
-    <div>
-        {messages.map((message, index) => (
-            <Card key={index}>
+        <div>
+        {messages.map((message) => ( 
+            <Card key={message.id}>
                 <CardContent>
                     <Typography variant="body1">
                         {message.message}
@@ -47,11 +52,14 @@ function MessageBoard(){
                     <Typography variant="caption" color="textSecondary">
                         Posted by: {message.username} at {formatDate(message.posted_at)}
                     </Typography>
+                    {userID === message.posted_by && (
+                        <Button onClick={() => handleDeleteMessage(message.id)}>Delete</Button>
+                    )}
                 </CardContent>
             </Card>
-            ))}
+        ))}
         <TextField 
-            name='note'
+            name='message'
             label='Add a New Message'
             value={newMessage}
             onChange={(event) => setNewMessage(event.target.value)}
