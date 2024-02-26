@@ -15,18 +15,25 @@ function MessageBoard(){
     }, []);
 
     function addMessage() {
-        dispatch({type: 'ADD_MESSAGE', payload: newMessage})
+        const messageObject = {
+            message: newMessage
+        }
+        dispatch({type: 'ADD_MESSAGE', payload: messageObject})
         setNewMessage('');
     }
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
+        const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Ensure two-digit format for month
+        const day = String(date.getDate()).padStart(2, '0'); // Ensure two-digit format for day
         const hours = date.getHours();
         const minutes = date.getMinutes();
-        const formattedHours = String(hours).padStart(2, '0'); // Ensure two-digit format for hours
+        const formattedHours = String(hours % 12 || 12).padStart(2, '0'); // Ensure two-digit format for hours
+        const formattedMinutes = String(minutes).padStart(2, '0'); // Ensure two-digit format for minutes
         const ampm = hours >= 12 ? 'PM' : 'AM';
     
-        return `${formattedHours}:${minutes} ${ampm}`;
+        return `${month}/${day}/${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
     };
 
     return(

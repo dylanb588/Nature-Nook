@@ -16,7 +16,7 @@ function* fetchMessage() {
 
 function* addMessage(action) {
     try {
-
+        console.log('Message saga', action.payload);
         yield axios.post(`/api/message`, action.payload);
         yield put({type: 'FETCH_MESSAGE'});
     } catch(error) {

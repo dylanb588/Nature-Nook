@@ -25,13 +25,14 @@ const {
   router.post('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const message = req.body;
+    console.log("Message post", message);
 
     const query = `
     INSERT INTO "message" ("posted_by", "message", "posted_at")
     VALUES ($1, $2, NOW());
     `;
 
-    pool.query(query, [userID, message])
+    pool.query(query, [userID, message.message])
     .then(result => {
         res.sendStatus(201);
     }).catch(error => {
