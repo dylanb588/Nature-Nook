@@ -24,10 +24,17 @@ function* addMessage(action) {
     }
 }
 
+function* deleteMessage(action) {
+    console.log(action.payload);
+    yield axios.delete(`/api/message/${action.payload}`);
+    yield put({type: 'FETCH_MESSAGE'});
+}
+
 
 function* messageSaga() {
     yield takeLatest('FETCH_MESSAGE', fetchMessage);
     yield takeLatest('ADD_MESSAGE', addMessage);
+    yield takeLatest('DELETE_MESSAGE', deleteMessage);
 }
 
 export default messageSaga;

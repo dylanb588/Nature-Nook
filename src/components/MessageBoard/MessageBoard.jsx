@@ -27,6 +27,10 @@ function MessageBoard(props){
         setNewMessage('');
     }
 
+    function deleteMessage(messageID) {
+        dispatch({type: 'DELETE_MESSAGE', payload: messageID});
+    }
+
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
@@ -53,7 +57,7 @@ function MessageBoard(props){
                         Posted by: {message.username} at {formatDate(message.posted_at)}
                     </Typography>
                     {userID === message.posted_by && (
-                        <Button onClick={() => handleDeleteMessage(message.id)}>Delete</Button>
+                        <Button onClick={() => deleteMessage(message.id)}>Delete</Button>
                     )}
                 </CardContent>
             </Card>
