@@ -10,9 +10,18 @@ const {
     const messageID = req.params.messageID;
     console.log(messageID);
     const query = `
-    SELECT *
-    FROM "comment"
-    WHERE "message_id" = $1;
+    SELECT 
+    comment.*, 
+    message.message AS associated_message,
+    "user".username AS commenter_username
+    FROM 
+    comment
+    JOIN 
+    message ON comment.message_id = message.id
+    JOIN 
+    "user" ON comment.author = "user".id
+    WHERE 
+    comment.message_id = $1;
     `;
 
     pool.query(query, [messageID])
