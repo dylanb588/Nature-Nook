@@ -3,12 +3,10 @@ import axios from 'axios';
 
 function* fetchComments(action){
     try{
-        const messageID = action.payload;
-        console.log('SAGA', messageID);
-        const response = yield axios.get(`/api/comment/${messageID}`);
-    
+        const response = yield axios.get('/api/comment');
+
         yield put({
-            type: 'SET_COMMENT',
+            type: 'SET_COMMENTS',
             payload: response.data
         });
     } catch (error) {

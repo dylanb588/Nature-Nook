@@ -33,7 +33,7 @@ function MessageBoard(props){
         dispatch({type: 'DELETE_MESSAGE', payload: messageID});
     }
     const goToMessageComments = (message) => {
-        history.push(`/comments/${message.id}`);
+        history.push(`/message/${message.id}`);
     };
 
     const formatDate = (timestamp) => {

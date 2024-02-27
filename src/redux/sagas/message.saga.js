@@ -16,7 +16,9 @@ function* fetchMessage() {
 
 function* fetchSingleMessage(action) {
     try{
+        console.log(action.payload);
         const messageID = action.payload;
+        console.log(messageID);
         const response = yield axios.get(`/api/message/comments/${messageID}`);
 
         yield put({ type: 'SET_SELECTED_MESSAGE', payload: response.data })

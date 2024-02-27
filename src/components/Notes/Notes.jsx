@@ -27,14 +27,14 @@ function Notes(props) {
         let plantObj = {
             plantID,
             note
-        }
-        dispatch({type: 'ADD_NOTE', payload: plantObj})
+        };
+        dispatch({type: 'ADD_NOTE', payload: plantObj});
         setNote('');
     }
 
     function deleteNote(noteID) {
         console.log(noteID);
-        dispatch({type: 'DELETE_NOTE', payload: noteID})
+        dispatch({type: 'DELETE_NOTE', payload: noteID});
     }
 
     return(

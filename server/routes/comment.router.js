@@ -6,28 +6,13 @@ const {
   } = require('../modules/authentication-middleware');
 
   // GETS the comments for that message.
-  router.get('/:messageID', rejectUnauthenticated, (req, res) => {
-    const messageID = req.params.messageID;
-    console.log(messageID);
+  router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `
-    SELECT 
-        comment.*, 
-        message.message AS associated_message,
-        commenter.username AS commenter_username,
-        message_poster.username AS message_poster_username
-    FROM 
-        comment
-    JOIN 
-        message ON comment.message_id = message.id
-    JOIN 
-        "user" AS commenter ON comment.author = commenter.id
-    JOIN 
-        "user" AS message_poster ON message.posted_by = message_poster.id
-    WHERE 
-        comment.message_id = $1;
+    SELECT *
+    FROM "comment";
     `;
 
-    pool.query(query, [messageID])
+    pool.query(query)
     .then(result => {
         res.send(result.rows);
     })
@@ -39,9 +24,8 @@ const {
 // POST for adding new comments to a message
 router.post('/:messageID', rejectUnauthenticated, (req, res) => {
     const author = req.user.id;
-    const messageID = req.params.messageID;
-    console.log(messageID);
-    const { comment } = req.body;
+    console.log(req.body);
+    const { messageID, comment } = req.body;
 
     const query = `
     INSERT INTO "comment" ("message_id", "author", "comment", "posted_time")

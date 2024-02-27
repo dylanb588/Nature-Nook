@@ -26,12 +26,11 @@ const {
 // GETS a single message for comments
 router.get('/comments/:messageID', rejectUnauthenticated, (req, res) => {
   const messageID = req.params.messageID;
+  console.log(messageID);
 
   const query = `
-  SELECT message.*, "user".username
-  FROM "message"
-  JOIN "user" ON message.posted_by = "user".id
-  WHERE message.id = $1
+  SELECT * FROM "message"
+  WHERE "id" = $1
   `;
 
   pool.query(query, [messageID])
