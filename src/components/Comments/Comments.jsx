@@ -8,7 +8,19 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function Comments() {
+    const {messageID} = useParams();
+    const dispatch = useDispatch();
+    const comments = useSelector((store) => store.comment);
     const [newComment, setNewComment] = useState('');
+
+    const message = comments[0];
+    console.log(message);
+
+    console.log(comments);
+
+    useEffect(() => {
+        dispatch({type: 'FETCH_COMMENT', payload: messageID})
+    }, []);
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -26,6 +38,30 @@ function Comments() {
 
     return (
         <>
+            <Card key={message.id}>
+                <CardContent>
+                    <Typography variant="body1">
+                        {message.associated_message}
+                    </Typography>
+                    <Typography variant="caption" color="textSecondary">
+                        Posted by: {message.message_poster_username}
+                    </Typography>
+                </CardContent>
+            </Card>
+            <br />
+            <h3 align='center'>Comments</h3>
+            {comments.map((comment) => ( 
+            <Card key={comment.id}>
+                <CardContent>
+                    <Typography variant="body1">
+                        {comment.comment}
+                    </Typography>
+                    <Typography variant="caption" color="textSecondary">
+                        Posted by: {comment.commenter_username} at {formatDate(comment.posted_time)}
+                    </Typography>
+                </CardContent>
+            </Card>
+        ))}
             <TextField
                 name='comment'
                 label='Add a Comment'

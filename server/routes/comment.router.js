@@ -11,17 +11,20 @@ const {
     console.log(messageID);
     const query = `
     SELECT 
-    comment.*, 
-    message.message AS associated_message,
-    "user".username AS commenter_username
+        comment.*, 
+        message.message AS associated_message,
+        commenter.username AS commenter_username,
+        message_poster.username AS message_poster_username
     FROM 
-    comment
+        comment
     JOIN 
-    message ON comment.message_id = message.id
+        message ON comment.message_id = message.id
     JOIN 
-    "user" ON comment.author = "user".id
+        "user" AS commenter ON comment.author = commenter.id
+    JOIN 
+        "user" AS message_poster ON message.posted_by = message_poster.id
     WHERE 
-    comment.message_id = $1;
+        comment.message_id = $1;
     `;
 
     pool.query(query, [messageID])
