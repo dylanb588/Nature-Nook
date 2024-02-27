@@ -8,6 +8,7 @@ const {
   // GETS the comments for that message.
   router.get('/:messageID', rejectUnauthenticated, (req, res) => {
     const messageID = req.params.messageID;
+    console.log(messageID);
     const query = `
     SELECT *
     FROM "comment"
@@ -25,15 +26,15 @@ const {
 });
 // POST for adding new comments to a message
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const userID = req.user.id;
+    const author = req.user.id;
     const comment = req.body;
 
     const query = `
-    INSERT INTO "comment" ("message_id", "posted_by", "comment", "posted_at")
+    INSERT INTO "comment" ("message_id", "author", "comment", "posted_time")
     VALUES ($1, $2, $3, NOW());
     `;
 
-    pool.query(query, [comment.message_id, userID, comment.comment])
+    pool.query(query, [comment.message_id, author, comment.comment])
     .then(result => {
         res.sendStatus(201);
     }).catch(error => {

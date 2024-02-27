@@ -1,4 +1,4 @@
-const singleMessageReducer = (state = {}, action) => {
+const singleMessageReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SELECTED_MESSAGE':
             return action.payload;
