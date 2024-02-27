@@ -32,8 +32,8 @@ function MessageBoard(props){
     function deleteMessage(messageID) {
         dispatch({type: 'DELETE_MESSAGE', payload: messageID});
     }
-    const goToMessageComments = (messageId) => {
-        history.push(`/comments/${messageId}`);
+    const goToMessageComments = (message) => {
+        history.push(`/comments/${message.id}`);
     };
 
     const formatDate = (timestamp) => {
@@ -55,7 +55,7 @@ function MessageBoard(props){
         {messages.map((message) => ( 
             <Card key={message.id}>
                 <CardContent>
-                    <Typography onClick={() => goToMessageComments(message.id)} variant="body1">
+                    <Typography onClick={() => goToMessageComments(message)} variant="body1">
                         {message.message}
                     </Typography>
                     <Typography variant="caption" color="textSecondary">

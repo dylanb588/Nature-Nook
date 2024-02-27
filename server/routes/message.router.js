@@ -24,7 +24,7 @@ const {
 });
 
 // GETS a single message for comments
-router.get('/:messageID', rejectUnauthenticated, (req, res) => {
+router.get('/comments/:messageID', rejectUnauthenticated, (req, res) => {
   const messageID = req.params.messageID;
 
   const query = `

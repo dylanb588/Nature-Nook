@@ -20,7 +20,7 @@ function* addComment(action) {
     try {
         console.log('Comment Saga', action.payload);
         yield axios.post(`/api/comment`, action.payload);
-        yield put({type: 'FETCH_SINGLE_MESSAGE'});
+        yield put({type: 'FETCH_COMMENT'});
     } catch(error) {
         console.log('Error adding comment', error);
     }

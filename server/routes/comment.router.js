@@ -37,16 +37,18 @@ const {
     });
 });
 // POST for adding new comments to a message
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/:messageID', rejectUnauthenticated, (req, res) => {
     const author = req.user.id;
-    const comment = req.body;
+    const messageID = req.params.messageID;
+    console.log(messageID);
+    const { comment } = req.body;
 
     const query = `
     INSERT INTO "comment" ("message_id", "author", "comment", "posted_time")
     VALUES ($1, $2, $3, NOW());
     `;
 
-    pool.query(query, [comment.message_id, author, comment.comment])
+    pool.query(query, [messageID, author, comment])
     .then(result => {
         res.sendStatus(201);
     }).catch(error => {
