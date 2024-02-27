@@ -22,6 +22,19 @@ function Comments() {
         dispatch({type: 'FETCH_COMMENT', payload: messageID})
     }, []);
 
+    const handlePostComment = () => {
+        // Dispatch an action to post the new comment to the server
+        dispatch({
+            type: 'POST_COMMENT',
+            payload: {
+                messageID,
+                comment: newComment
+            }
+        });
+        // Clear the input field after posting the comment
+        setNewComment('');
+    };
+
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
         const year = date.getFullYear().toString().slice(-2);
@@ -70,7 +83,7 @@ function Comments() {
                 style={{ width: 1000 }}
                 required
             />
-            <Button >Post Comment</Button>
+            <Button onClick={() => handlePostComment()}>Post Comment</Button>
         </>
     );
 }
