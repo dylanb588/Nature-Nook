@@ -39,7 +39,7 @@ function PlantDetails() {
                 dispatch({ type: 'DELETE_PLANT', payload: plantID });
                 Swal.fire({
                     title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    text: "Your plant has been deleted.",
                     icon: "success"
                 }).then(() => {
                     // Redirect after the success message is closed
