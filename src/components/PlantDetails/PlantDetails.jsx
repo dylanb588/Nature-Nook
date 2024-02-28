@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Swal from 'sweetalert2';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 function PlantDetails() {
     const dispatch = useDispatch();
@@ -55,7 +56,7 @@ function PlantDetails() {
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <Card sx={{ width: 600, margin: 10, padding: 2 }}>
+                    <Card sx={{ maxWidth: 600, margin: 8, padding: 2 }}>
                         <CardContent>
                             <Typography variant="h3" gutterBottom>
                                 {plant.plant_name} Details
@@ -68,9 +69,9 @@ function PlantDetails() {
                                     image={plant.plant_image}
                                     alt={plant.plant_name}
                                 />
-                                <Typography variant="body1">{plant.care}</Typography>
-                                <Typography variant="body1">{plant.soil_type}</Typography>
-                                <Typography variant="body1">Water about every {plant.water} days</Typography>
+                                <Typography variant="body1"><strong>Plant Care:</strong> {plant.care}</Typography>
+                                <Typography variant="body1"><strong>Soil Type:</strong> {plant.soil_type}</Typography>
+                                <Typography variant="body1"><strong>Watering:</strong> Water about every {plant.water} days</Typography>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -89,8 +90,10 @@ function PlantDetails() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={6} sx={{ overflowY: 'auto' }}>
-                    <Notes plant={plant}/>
+                <Grid item xs={12} md={6} sx={{ overflowY: 'auto'}}>
+                    <Paper>
+                        <Notes plant={plant}/>
+                    </Paper>
                 </Grid>
                 </Grid>
             </Box>
