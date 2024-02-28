@@ -7,6 +7,7 @@ function PlantEdit() {
     const dispatch = useDispatch();
     const history = useHistory();
     const plants = useSelector((store) => store.selectedPlant);
+    console.log(plants);
     const { id } = useParams();
 
     // State to hold edited plant details
@@ -21,7 +22,7 @@ function PlantEdit() {
     useEffect(() => {
         // Fetch plant details and populate form fields
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id });
-    }, [dispatch, id]);
+    }, [id]);
 
     // Update editedPlant state when plants are fetched
     useEffect(() => {
@@ -45,7 +46,7 @@ function PlantEdit() {
     };
 
     return (
-        plants ? (
+        plants[0] ? (
             <Card sx={{ width: 600, margin: 'auto', padding: 2 }}>
                 <CardContent>
                     <Typography variant="h3" gutterBottom>

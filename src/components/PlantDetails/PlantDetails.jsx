@@ -21,7 +21,6 @@ function PlantDetails() {
     // Gets the single plants's info.
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
-        return () => dispatch({type: 'CLEAR_PLANT'})
     }, [id]);
 
     function deletePlant(plantID) {
