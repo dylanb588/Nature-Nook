@@ -30,6 +30,7 @@ function Search() {
                         (user.username.toLowerCase().includes(search) && user.id !== loggedIn.id);
                 }).map((user) => (
                     <Link key={user.id} to={`/user/${user.id}`}>
+                        <img src={user.profile_pic} />
                         <li>{user.username}</li>
                     </Link>
                 ))}

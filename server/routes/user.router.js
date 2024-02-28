@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GETS the list of user's for the search page.
 router.get('/search', rejectUnauthenticated, (req, res) => {
   const query = `
-  SELECT "username", "id"
+  SELECT "username", "id", "profile_pic"
   FROM "user"
   `;
 
@@ -37,8 +37,8 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, profile_pic)
+    VALUES ($1, $2, 'public/nature-nook-favicon-color.png') RETURNING id`;
   pool
     .query(queryText, [username, password])
     .then(() => res.sendStatus(201))
