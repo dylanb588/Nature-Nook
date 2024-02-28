@@ -21,9 +21,9 @@ function UserPage() {
 
   return (
     <main>
-      <div className="container">
+      <div className="welcomeContainer">
         <img className='vine' src='public/vine-146978_640.png' />
-        <h2 align='center'>Welcome to your Nature Nook, {user.username}!</h2>
+        <h2 className='welcome' align='center'>Welcome to your Nature Nook, {user.username}!</h2>
         <img className='image' src='public/vine-146978_640.png' />
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">

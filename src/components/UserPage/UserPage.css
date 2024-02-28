@@ -1,4 +1,4 @@
-.container {
+.welcomeContainer {
     display: flex;
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
@@ -20,7 +20,7 @@
     max-width: 50%; /* Limit the maximum width of the image to half of the container width */
   }
   
-  h2 {
+  .welcome {
     text-align: center; /* Center the text within the h2 element */
     font-family: 'Dancing Script', cursive;
     font-size: 30px;
