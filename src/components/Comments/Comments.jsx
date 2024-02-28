@@ -5,12 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextField, Button } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 
 function Comments(props) {
     const comments = useSelector((store) => store.comment);
-    console.log('COMMENTS:', comments);
-    console.log('Comment props', props);
     const messageID = props.message.id;
+    const userID = props.user.id;
 
     const dispatch = useDispatch();
     const [comment, setComment] = useState('');
@@ -31,17 +31,40 @@ function Comments(props) {
     function deleteComment(commentID) {
         dispatch({type: 'DELETE_COMMENT', payload: commentID});
     }
-console.log('Comms again', comments);
+
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Ensure two-digit format for month
+        const day = String(date.getDate()).padStart(2, '0'); // Ensure two-digit format for day
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const formattedHours = String(hours % 12 || 12).padStart(2, '0'); // Ensure two-digit format for hours
+        const formattedMinutes = String(minutes).padStart(2, '0'); // Ensure two-digit format for minutes
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+        return `${month}/${day}/${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
+    };
+    
     return(
         <Container>
             {comments?.length > 0 ? (
                 comments.filter((c) => c.message_id === messageID).map(comment => (
-                    <div key={comment.id}>
-                        <p>{comment.comment}</p>
-                        <IconButton onClick={() => deleteComment(comment.id)} aria-label='delete'>
+                    <Card key={comment.id}>
+                <CardContent>
+                    <Typography variant="body1">
+                        {comment.comment}
+                    </Typography>
+                    <Typography variant="caption" color="textSecondary">
+                        Posted by: {comment.username} at {formatDate(comment.posted_time)}
+                    </Typography>
+                    {userID === comment.author && (
+                        <IconButton onClick={() => deleteComment(comment.id)} aria-label="delete">
                             <DeleteIcon />
                         </IconButton>
-                    </div>
+                    )}
+                </CardContent>
+            </Card>
                 ))
             ) : (
                 <h3>No Comments</h3>

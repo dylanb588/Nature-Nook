@@ -27,7 +27,7 @@ function* addComment(action) {
 function* deleteComment(action) {
     try {
         yield axios.delete(`/api/comment/delete/${action.payload}`)
-        yield put({type: 'FETCH_SINGLE_MESSAGE'})
+        yield put({type: 'FETCH_COMMENT'})
     } catch(error) {
         console.log('Error deleting comment', error);
     }

@@ -114,7 +114,7 @@ function App() {
             exact
             path="/message/:messageID"
           >
-            <MessageComments />
+            <MessageComments user={user}/>
           </ProtectedRoute>
 
           <ProtectedRoute

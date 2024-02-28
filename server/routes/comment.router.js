@@ -48,7 +48,7 @@ router.delete('/delete/:commentID', rejectUnauthenticated, (req, res) => {
     const query = `
     DELETE FROM "comment"
     WHERE "id" = $1
-    AND "posted_by" = $2;
+    AND "author" = $2;
     `
 
     pool.query(query, [commentID, userID])

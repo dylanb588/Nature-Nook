@@ -1,20 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 import Comments from "../Comments/Comments";
 
 import { Typography, Button, Card, CardContent, CardMedia, Stack } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function MessageComments() {
+function MessageComments(props) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const messages = useSelector((store) => store.selectedMessage);
-    console.log(messages);
+    const user = props.user;
+    console.log(user);
     const { messageID } = useParams();
-    console.log('useParams', messageID);
+
 
     const message = messages[0];
 
@@ -49,7 +48,7 @@ function MessageComments() {
                     </Typography>
                 </CardContent>
             </Card>
-            <Comments message={message}/>
+            <Comments message={message} user={user}/>
             </>
         ) : (
             <CircularProgress color="success" align='center'/>
