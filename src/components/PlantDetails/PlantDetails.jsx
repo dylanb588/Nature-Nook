@@ -7,6 +7,7 @@ import Notes from "../Notes/Notes";
 
 import { Typography, Button, Card, CardContent, CardMedia, Stack } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import Swal from 'sweetalert2'
 
 function PlantDetails() {
     const dispatch = useDispatch();
@@ -24,8 +25,28 @@ function PlantDetails() {
     }, [id]);
 
     function deletePlant(plantID) {
-        dispatch({type: 'DELETE_PLANT', payload: plantID});
-        history.push('/user');
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user confirms deletion, dispatch the action and redirect
+                dispatch({ type: 'DELETE_PLANT', payload: plantID });
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                }).then(() => {
+                    // Redirect after the success message is closed
+                    history.push('/user');
+                });
+            }
+        });
     }
 
     return (
