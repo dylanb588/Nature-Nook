@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import './Search.css';
 
 function Search() {
     const users = useSelector((store)  => store.search);
@@ -16,7 +18,7 @@ function Search() {
     
 
     return(
-        <div align='center'>
+        <div className='search'>
             <h3>Search Users</h3>
             <input
                 type='text'
@@ -30,7 +32,7 @@ function Search() {
                         (user.username.toLowerCase().includes(search) && user.id !== loggedIn.id);
                 }).map((user) => (
                     <Link key={user.id} to={`/user/${user.id}`}>
-                        <img src={user.profile_pic} />
+                        <Avatar src={user.profile_pic} alt={user.username} />
                         <li>{user.username}</li>
                     </Link>
                 ))}

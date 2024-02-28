@@ -53,6 +53,7 @@ function Notes(props) {
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
                 style={{width: 800}}
+                variant='filled'
                 required
             />
             <Button onClick={() => addNote()}>Add Note</Button>
