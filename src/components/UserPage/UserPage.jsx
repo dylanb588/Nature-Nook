@@ -21,7 +21,7 @@ function UserPage() {
   return (
     <main>
       <div className="container">
-        <h2 align='center'>Welcome, {user.username}!</h2>
+        <h2 align='center'>Welcome to your Nature Nook, {user.username}!</h2>
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
@@ -37,7 +37,7 @@ function UserPage() {
               />
               </Link>
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" align='center'>
                   {plant.plant_name}
                 </Typography>
               </CardContent>

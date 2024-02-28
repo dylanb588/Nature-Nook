@@ -8,8 +8,9 @@ const {
   // GETS the comments for that message.
   router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `
-    SELECT *
-    FROM "comment";
+    SELECT comment.*, "user".username
+    FROM "comment"
+    INNER JOIN "user" ON comment.author = "user".id;
     `;
 
     pool.query(query)

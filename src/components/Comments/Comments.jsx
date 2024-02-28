@@ -50,7 +50,7 @@ function Comments(props) {
         <Container>
             {comments?.length > 0 ? (
                 comments.filter((c) => c.message_id === messageID).map(comment => (
-                    <Card key={comment.id}>
+                    <Card key={comment.id} sx={{ width: 600 }}>
                 <CardContent>
                     <Typography variant="body1">
                         {comment.comment}
@@ -70,7 +70,7 @@ function Comments(props) {
                 <h3>No Comments</h3>
             )}
             <TextField
-                name='note'
+                name='comment'
                 label='Add a comment'
                 value={comment}
                 onChange={(event) => setComment(event.target.value)}

@@ -8,7 +8,10 @@ import React from 'react';
 function InfoPage() {
   return (
     <div className="container">
-      <p>Info Page</p>
+      <h1>Nature Nook Info</h1>
+      <h3>Getting Started</h3>
+      <p>When you first create an account you'll be brought to your nature nook.</p>
+      <p>To fill your Nature Nook with your beautiful plants you'll want to click on Add New Plant.</p>
     </div>
   );
 }

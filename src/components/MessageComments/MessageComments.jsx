@@ -44,7 +44,7 @@ function MessageComments(props) {
                         {message.message}
                     </Typography>
                     <Typography variant="caption" color="textSecondary">
-                        Posted by: {message.username} at {formatDate(message.posted_at)}
+                        Posted at: {formatDate(message.posted_at)}
                     </Typography>
                 </CardContent>
             </Card>
