@@ -45,9 +45,9 @@ CREATE TABLE "message" (
 CREATE TABLE "comment" (
     "id" SERIAL PRIMARY KEY,
     "message_id" INT REFERENCES "message",
-    "posted_by" INT REFERENCES "user",
+    "auhtor" INT REFERENCES "user",
     "comment" TEXT NOT NULL,
-    "posted_at" TIMESTAMP
+    "posted_time" TIMESTAMP
 );
 
 

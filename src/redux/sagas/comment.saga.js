@@ -6,7 +6,7 @@ function* fetchComments(action){
         const response = yield axios.get('/api/comment');
 
         yield put({
-            type: 'SET_COMMENTS',
+            type: 'SET_COMMENT',
             payload: response.data
         });
     } catch (error) {

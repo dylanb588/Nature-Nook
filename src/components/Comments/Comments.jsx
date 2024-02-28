@@ -7,7 +7,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { TextField, Button } from '@mui/material';
 
 function Comments(props) {
-    const comments = useSelector(store => store.comment);
+    const comments = useSelector((store) => store.comment);
+    console.log('COMMENTS:', comments);
     console.log('Comment props', props);
     const messageID = props.message.id;
 
@@ -15,7 +16,7 @@ function Comments(props) {
     const [comment, setComment] = useState('');
 
     useEffect(() => {
-        dispatch({type: 'FETCH_COMMENT', payload: messageID});
+        dispatch({type: 'FETCH_COMMENT'});
     }, []);
 
     function addComment() {
@@ -30,7 +31,7 @@ function Comments(props) {
     function deleteComment(commentID) {
         dispatch({type: 'DELETE_COMMENT', payload: commentID});
     }
-
+console.log('Comms again', comments);
     return(
         <Container>
             {comments?.length > 0 ? (
