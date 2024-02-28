@@ -21,13 +21,12 @@ function UserPage() {
   return (
     <main>
       <div className="container">
-        <h2>Welcome, {user.username}!</h2>
-        <LogOutButton className="btn" />
+        <h2 align='center'>Welcome, {user.username}!</h2>
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
           plants.map(plant => (
-          <Card key={plant.id} sx={{ width: 300 }}>
+            <Card key={plant.id} sx={{ width: 300 }}>
             <CardActionArea>
               <Link to={`/plantdetails/${plant.id}`}>
               <CardMedia
@@ -47,8 +46,10 @@ function UserPage() {
       ))
       ) : (
         <CircularProgress color="success" align="center"/>
-      )}
+        )}
       </Stack>
+      <br />
+        <LogOutButton className="btn" />
     </main>
   );
 }

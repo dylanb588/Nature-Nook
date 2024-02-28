@@ -13,15 +13,14 @@ function PlantDetails() {
     const history = useHistory();
     const plants = useSelector((store) => store.selectedPlant);
     const { id } = useParams();
-    
-    console.log('Plant id', id);
 
     // Pulls the single plant out of the array
     const plant = plants[0];
-    // console.log(plant);
 
+    // Gets the single plants's info.
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
+        return () => dispatch({type: 'CLEAR_PLANT'})
     }, [id]);
 
     function deletePlant(plantID) {
