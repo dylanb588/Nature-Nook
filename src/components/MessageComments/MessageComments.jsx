@@ -11,7 +11,6 @@ function MessageComments(props) {
     const dispatch = useDispatch();
     const messages = useSelector((store) => store.selectedMessage);
     const user = props.user;
-    console.log(user);
     const { messageID } = useParams();
 
 

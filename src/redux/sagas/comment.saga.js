@@ -16,7 +16,6 @@ function* fetchComments(action){
 
 function* addComment(action) {
     try {
-        console.log('Comment Saga', action.payload);
         yield axios.post(`/api/comment`, action.payload);
         yield put({type: 'FETCH_COMMENT'});
     } catch(error) {

@@ -9,10 +9,7 @@ import { TextField, Button } from '@mui/material';
 
 function Notes(props) {
     const notes = useSelector(store => store.notes);
-    console.log('Notes store', notes);
-    console.log('Plant:', props);
     const plantID = props.plant.id;
-    console.log(plantID);
     const dispatch = useDispatch();
     const [note, setNote] = useState('');
 
@@ -33,7 +30,6 @@ function Notes(props) {
     }
 
     function deleteNote(noteID) {
-        console.log(noteID);
         dispatch({type: 'DELETE_NOTE', payload: noteID});
     }
 

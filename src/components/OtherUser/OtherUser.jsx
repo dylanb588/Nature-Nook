@@ -12,7 +12,6 @@ function OtherUser() {
     const dispatch = useDispatch();
     const plants = useSelector((store) => store.plants);
     const { userID } = useParams();
-    console.log('Here ios userID', userID);
 
     useEffect(() => {
       dispatch({type: 'FETCH_OTHER_PLANTS', payload: userID})

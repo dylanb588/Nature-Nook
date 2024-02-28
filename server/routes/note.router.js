@@ -28,9 +28,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const note = req.body;
 
-    console.log('Here is user', userID);
-    console.log('Here is note', note);
-
     const query = `
     INSERT INTO "note" ("user_id", "plant_id", "note")
     VALUES ($1, $2, $3)

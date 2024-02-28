@@ -26,7 +26,6 @@ const {
 // GETS a single message for comments
 router.get('/comments/:messageID', rejectUnauthenticated, (req, res) => {
   const messageID = req.params.messageID;
-  console.log(messageID);
 
   const query = `
   SELECT * FROM "message"
@@ -46,7 +45,6 @@ router.get('/comments/:messageID', rejectUnauthenticated, (req, res) => {
   router.post('/', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const message = req.body;
-    console.log("Message post", message);
 
     const query = `
     INSERT INTO "message" ("posted_by", "message", "posted_at")
@@ -65,8 +63,6 @@ router.get('/comments/:messageID', rejectUnauthenticated, (req, res) => {
   router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const userID = req.user.id;
     const messageID = req.params.id;
-    console.log('message id', messageID);
-    
 
     const query = `
     DELETE FROM "message"

@@ -24,7 +24,6 @@ function AddPlant() {
     reader.onloadend = () => {
       setImage(reader.result);
     }
-    console.log(image);
   }
 
   const handleChange = (e) => {

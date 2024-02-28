@@ -16,9 +16,7 @@ function* fetchMessage() {
 
 function* fetchSingleMessage(action) {
     try{
-        console.log(action.payload);
         const messageID = action.payload;
-        console.log(messageID);
         const response = yield axios.get(`/api/message/comments/${messageID}`);
 
         yield put({ type: 'SET_SELECTED_MESSAGE', payload: response.data })
@@ -29,7 +27,6 @@ function* fetchSingleMessage(action) {
 
 function* addMessage(action) {
     try {
-        console.log('Message saga', action.payload);
         yield axios.post(`/api/message`, action.payload);
         yield put({type: 'FETCH_MESSAGE'});
     } catch(error) {
@@ -38,7 +35,6 @@ function* addMessage(action) {
 }
 
 function* deleteMessage(action) {
-    console.log(action.payload);
     yield axios.delete(`/api/message/${action.payload}`);
     yield put({type: 'FETCH_MESSAGE'});
 }

@@ -29,7 +29,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GETS the user page of a different user
 router.get('/:userID', rejectUnauthenticated, (req, res) => {
   const { userID } = req.params;
-  console.log('Here is userID', userID);
   
   const query = `
     SELECT * FROM "plant"
@@ -50,8 +49,6 @@ router.get('/details/:plantID', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
   const plantID = req.params.plantID;
 
-  console.log('Plant details id', plantID);
-
   const query = `
   SELECT * FROM "plant"
   WHERE "id" = $1
@@ -70,7 +67,7 @@ router.get('/details/:plantID', rejectUnauthenticated, (req, res) => {
 // POST for new plant's allows user to upload a file of their plant and plant info
 router.post('/', rejectUnauthenticated, async(req, res) => {
   const {image, plantName, scientificName, care, soilType, water } = req.body;
-  const username = req.user.username
+  const username = req.user.username;
   
   await cloudinary.uploader.upload(image,
     {
@@ -82,7 +79,6 @@ router.post('/', rejectUnauthenticated, async(req, res) => {
         if(error){
           console.log(error);
         } 
-        console.log('Here is result', result);
       
         const justThePlantUrl = result.url;
         const plantQuery = `
@@ -107,9 +103,6 @@ router.post('/', rejectUnauthenticated, async(req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const plantID = req.params.id;
   const userID = req.user.id;
-  console.log('Here is req.body', req.body);
-  console.log('Here userid', userID);
-  console.log('Here is plantID,', plantID);
   const { plant_name, scientific_name, care, soil_type, water } = req.body;
 
   const query = `

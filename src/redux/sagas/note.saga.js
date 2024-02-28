@@ -16,7 +16,6 @@ function* fetchNotes() {
 
 function* addNote(action) {
     try {
-        console.log('Here is new note action.payload', action.payload);
         yield axios.post(`/api/note/`, action.payload);
         yield put({type: 'FETCH_NOTES'});
     } catch(error) {
@@ -25,7 +24,6 @@ function* addNote(action) {
 }
 
 function* deleteNote(action) {
-    console.log('Note id', action.payload);
     yield axios.delete(`/api/note/${action.payload}`);
     yield put({type: 'FETCH_NOTES'});
 }

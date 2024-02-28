@@ -25,8 +25,7 @@ const {
 // POST for adding new comments to a message
 router.post('/', rejectUnauthenticated, (req, res) => {
     const author = req.user.id;
-    console.log(req.body);
-    const comment = req.body
+    const comment = req.body;
 
     const query = `
     INSERT INTO "comment" ("message_id", "author", "comment", "posted_time")

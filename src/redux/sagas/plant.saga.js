@@ -17,7 +17,6 @@ function* fetchPlants() {
 function* fetchSinglePlant(action) {
     try{
         const plantID = action.payload;
-        console.log('Here be action payload', plantID);
         const singlePlant = yield axios.get(`/api/plant/details/${plantID}`);
 
         yield put({ type: 'SET_SELECTED_PLANT', payload: singlePlant.data })
@@ -28,9 +27,7 @@ function* fetchSinglePlant(action) {
 
 function* fetchOtherPlants(action) {
     try{
-        console.log('Here is action.payload', action.payload);
         const userID = action.payload;
-        console.log(userID);
         const response = yield axios.get(`/api/plant/${userID}`);
         yield put({type: 'SET_PLANTS', payload: response.data});
     } catch(error) {
@@ -40,7 +37,6 @@ function* fetchOtherPlants(action) {
 
 function* editPlant(action) {
     try {
-        console.log('Here be the edit', action.payload);
         const { id, plant_name, scientific_name, care, soil_type, water } = action.payload;
         yield axios.put(`/api/plant/${id}`, { plant_name, scientific_name, care, soil_type, water })
         yield put({type: 'FETCH_PLANTS'})
