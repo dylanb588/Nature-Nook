@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom'
+import './UserPage.css'
 
 import Stack from '@mui/material/Stack';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
@@ -21,12 +22,14 @@ function UserPage() {
   return (
     <main>
       <div className="container">
+        <img className='vine' src='public/vine-146978_640.png' />
         <h2 align='center'>Welcome to your Nature Nook, {user.username}!</h2>
+        <img className='image' src='public/vine-146978_640.png' />
       </div>
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
           plants.map(plant => (
-            <Card key={plant.id} sx={{ width: 300 }}>
+            <Card key={plant.id} sx={{ width: 300 }} style={{backgroundColor: "#989F7E"}}>
             <CardActionArea>
               <Link to={`/plantdetails/${plant.id}`}>
               <CardMedia

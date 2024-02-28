@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    background-color: #C4D5C5;
+    padding: 20px; /* Adjust padding as needed */
+    height: 100px;
+  }
+  
+  .vine {
+    flex: 1; /* Make the image grow to fill the available space */
+    max-width: 50%; /* Limit the maximum width of the image to half of the container width */
+    transform: scaleX(-1); /* Flip the image horizontally */
+  }
+  
+  .image {
+    flex: 1; /* Make the image grow to fill the available space */
+    max-width: 50%; /* Limit the maximum width of the image to half of the container width */
+  }
+  
+  h2 {
+    text-align: center; /* Center the text within the h2 element */
+  }
