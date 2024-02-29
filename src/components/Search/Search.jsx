@@ -29,16 +29,19 @@ function Search() {
             />
             <ul className='user-list'>
                 {users.filter((user) => {
-                    // Filter out the logged-in user's name from the list
-                    return (search.toLowerCase() === '' && user.id !== loggedIn.id) ||
-                        (user.username.toLowerCase().includes(search) && user.id !== loggedIn.id);
-                }).map((user) => (
-                    <li className='user-item' key={user.id}>
-                        <Link to={`/user/${user.id}`}>
-                            <Avatar src={user.profile_pic} alt={user.username} className='user-avatar' />
-                            <span className='user-name'>{user.username}</span>
-                        </Link>
-                    </li>
+                    // Convert both search input and usernames to lowercase for case-insensitive comparison
+                    const searchLowerCase = search.toLowerCase();
+                    const usernameLowerCase = user.username.toLowerCase();
+                    // Filter out the logged-in user's name from the list and perform case-insensitive search
+                    return (searchLowerCase === '' && user.id !== loggedIn.id) ||
+                    (usernameLowerCase.includes(searchLowerCase) && user.id !== loggedIn.id);
+                        }).map((user) => (
+                        <li className='user-item' key={user.id}>
+                            <Link to={`/user/${user.id}`}>
+                                <Avatar src={user.profile_pic} alt={user.username} className='user-avatar' />
+                                <span className='user-name'>{user.username}</span>
+                            </Link>
+                        </li>
                 ))}
             </ul>
         </div>

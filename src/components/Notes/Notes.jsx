@@ -16,8 +16,6 @@ function Notes(props) {
     const dispatch = useDispatch();
     const [note, setNote] = useState('');
 
-
-
     useEffect(() => {
         dispatch({type: 'FETCH_NOTES'})
     }, []);
@@ -34,7 +32,6 @@ function Notes(props) {
             console.error('Note cannot be empty');
         }
     };
-
 
     function addNote() {
         let plantObj = {
