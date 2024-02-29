@@ -57,6 +57,7 @@ function AddPlant() {
           <input type='file' id='fileInput' onChange={e=> handleChange(e)} required
           accept='image/png, image/jpeg, image/jpg, image/jfif, image/webp' />
           <TextField
+          id='plantName'
           name="plantName"
           label="Plant Name"
           value={plantInfo.plantName}

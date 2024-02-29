@@ -14,8 +14,8 @@ function OtherUser() {
     const { userID } = useParams();
 
     useEffect(() => {
-      dispatch({type: 'FETCH_OTHER_PLANTS', payload: userID})
-      return () => dispatch({type: 'CLEAR_PLANTS'})
+        dispatch({type: 'FETCH_OTHER_PLANTS', payload: userID})
+        return () => dispatch({type: 'CLEAR_PLANTS'})
     }, [dispatch]);
 
     return (
@@ -23,7 +23,7 @@ function OtherUser() {
         <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
             {plants?.length > 0 ? (
             plants.map(plant => (
-            <Card key={plant.id} sx={{ width: 300 }}>
+            <Card key={plant.id} sx={{ width: 300, backgroundColor: "#989F7E" }}>
                 <CardActionArea>
                 <CardMedia
                     component="img"

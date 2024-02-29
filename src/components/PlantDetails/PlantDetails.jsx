@@ -88,7 +88,7 @@ function PlantDetails() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={6} >
                     <Paper>
                         <Notes plant={plant}/>
                     </Paper>
