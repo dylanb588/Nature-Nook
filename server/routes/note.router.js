@@ -29,8 +29,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     const note = req.body;
 
     const query = `
-    INSERT INTO "note" ("user_id", "plant_id", "note")
-    VALUES ($1, $2, $3)
+    INSERT INTO "note" ("user_id", "plant_id", "note", "posted")
+    VALUES ($1, $2, $3, NOW())
     `;
 
     pool.query(query, [userID, note.plantID, note.note])
