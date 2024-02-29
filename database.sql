@@ -19,7 +19,8 @@ CREATE TABLE "plant" (
     "plant_image" varchar(300) NOT NULL,
     "care" TEXT NOT NULL,
     "soil_type" varchar(60),
-    "water" integer NOT NULL
+    "water" integer NOT NULL,
+    "next_water_date" TIMESTAMP
 );
 
 CREATE TABLE "note" (

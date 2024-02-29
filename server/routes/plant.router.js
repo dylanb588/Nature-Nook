@@ -65,36 +65,37 @@ router.get('/details/:plantID', rejectUnauthenticated, (req, res) => {
 });
 
 // POST for new plant's allows user to upload a file of their plant and plant info
-router.post('/', rejectUnauthenticated, async(req, res) => {
-  const {image, plantName, scientificName, care, soilType, water } = req.body;
+router.post('/', rejectUnauthenticated, async (req, res) => {
+  const { image, plantName, scientificName, care, soilType, water } = req.body;
   const username = req.user.username;
-  
-  await cloudinary.uploader.upload(image,
-    {
-      upload_preset: 'ml_default',
-      public_id: `${username}plant${Guid.newGuid()}`,
-      allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp'],
-    },
-      function(error, result) {
-        if(error){
-          console.log(error);
-        } 
-      
-        const justThePlantUrl = result.url;
-        const plantQuery = `
-          INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
-          VALUES ($1, $2, $3, $4, $5, $6, $7)
-          `;
-  
-          const values = [req.user.id, plantName, scientificName, justThePlantUrl, care, soilType, water]
-          pool.query(plantQuery, values)
-          .then(()=> {
-            res.sendStatus(201)
-          }).catch(error => {
-            console.log(error);
-            res.sendStatus(500);
-          })
-      })
+
+  // Upload the plant image to Cloudinary
+  try {
+      const result = await cloudinary.uploader.upload(image, {
+          upload_preset: 'ml_default',
+          public_id: `${username}plant${Guid.newGuid()}`,
+          allowed_formats: ['png', 'jpg', 'jpeg', 'svg', 'ico', 'jfif', 'webp']
+      });
+
+      const justThePlantUrl = result.url;
+
+      // Calculate the next watering date based on the current date and watering frequency
+      const nextWaterDate = new Date();
+      nextWaterDate.setDate(nextWaterDate.getDate() + water);
+
+      // Insert the plant information into the database, including the calculated next watering date
+      const plantQuery = `
+          INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water", "next_water_date")
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      `;
+      const values = [req.user.id, plantName, scientificName, justThePlantUrl, care, soilType, water, nextWaterDate];
+      await pool.query(plantQuery, values);
+
+      res.sendStatus(201);
+  } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+  }
 });
 
 
