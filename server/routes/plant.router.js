@@ -79,9 +79,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
       const justThePlantUrl = result.url;
 
-      // Calculate the next watering date based on the current date and watering frequency
-      const nextWaterDate = new Date();
-      nextWaterDate.setDate(nextWaterDate.getDate() + water);
+      const currentDate = new Date();
+      const nextWaterDate = new Date(currentDate.getTime() + water * 24 * 60 * 60 * 1000); // Assuming water represents the number of days between waterings
 
       // Insert the plant information into the database, including the calculated next watering date
       const plantQuery = `
@@ -106,13 +105,16 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
   const { plant_name, scientific_name, care, soil_type, water } = req.body;
 
+  const currentDate = new Date();
+  const nextWaterDate = new Date(currentDate.getTime() + water * 24 * 60 * 60 * 1000);
+
   const query = `
   UPDATE "plant"
-  SET "plant_name" = $1, "scientific_name" = $2, "care" = $3, "soil_type" = $4, "water" = $5
-  WHERE "id" = $6 AND "user_id" = $7
+  SET "plant_name" = $1, "scientific_name" = $2, "care" = $3, "soil_type" = $4, "water" = $5, "next_water_date" = $6
+  WHERE "id" = $7 AND "user_id" = $8
   `;
 
-  const values = [plant_name, scientific_name, care, soil_type, water, plantID, userID];
+  const values = [plant_name, scientific_name, care, soil_type, water, nextWaterDate, plantID, userID];
 
   pool.query(query, values)
   .then(() => {
