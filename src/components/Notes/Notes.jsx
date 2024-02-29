@@ -22,6 +22,19 @@ function Notes(props) {
         dispatch({type: 'FETCH_NOTES'})
     }, []);
 
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+    
+        // Check if the note is not empty
+        if (note.trim() !== '') {
+            // Call addNote function with the current note value
+            addNote(note);
+        } else {
+            // Display an error message or handle the empty note case appropriately
+            console.error('Note cannot be empty');
+        }
+    };
+
 
     function addNote() {
         let plantObj = {
@@ -70,16 +83,18 @@ function Notes(props) {
             ) : (
                 <h3>No Notes</h3>
             )}
-            <TextField 
-                name='note'
-                label='Add new note'
-                value={note}
-                onChange={(event) => setNote(event.target.value)}
-                sx={{ width: '100%', marginBottom: 2 }}
-                variant='filled'
-                required
-            />
-            <Button onClick={() => addNote()}>Add Note</Button>
+            <form onSubmit={handleSubmit}> 
+                <TextField 
+                    name='note'
+                    label='Add new note'
+                    value={note}
+                    onChange={(event) => setNote(event.target.value)}
+                    sx={{ width: '100%', marginBottom: 2 }}
+                    variant='filled'
+                    required
+                />
+                <Button type='submit' >Add Note</Button>
+            </form>
         </Container>
     )
 }
