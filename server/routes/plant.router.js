@@ -79,15 +79,15 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
       const justThePlantUrl = result.url;
 
-      const currentDate = new Date();
-      const nextWaterDate = new Date(currentDate.getTime() + water * 24 * 60 * 60 * 1000); // Assuming water represents the number of days between waterings
+      // const currentDate = new Date();
+      // const nextWaterDate = new Date(currentDate.getTime() + water * 24 * 60 * 60 * 1000); // Assuming water represents the number of days between waterings
 
       // Insert the plant information into the database, including the calculated next watering date
       const plantQuery = `
-          INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water", "next_water_date")
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+          INSERT INTO "plant" ("user_id", "plant_name", "scientific_name", "plant_image", "care", "soil_type", "water")
+          VALUES ($1, $2, $3, $4, $5, $6, $7)
       `;
-      const values = [req.user.id, plantName, scientificName, justThePlantUrl, care, soilType, water, nextWaterDate];
+      const values = [req.user.id, plantName, scientificName, justThePlantUrl, care, soilType, water];
       await pool.query(plantQuery, values);
 
       res.sendStatus(201);
@@ -105,16 +105,16 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   const userID = req.user.id;
   const { plant_name, scientific_name, care, soil_type, water } = req.body;
 
-  const currentDate = new Date();
-  const nextWaterDate = new Date(currentDate.getTime() + water * 24 * 60 * 60 * 1000);
+  // const currentDate = new Date();
+  // const nextWaterDate = new Date(currentDate.getTime() + water * 24 * 60 * 60 * 1000);
 
   const query = `
   UPDATE "plant"
-  SET "plant_name" = $1, "scientific_name" = $2, "care" = $3, "soil_type" = $4, "water" = $5, "next_water_date" = $6
-  WHERE "id" = $7 AND "user_id" = $8
+  SET "plant_name" = $1, "scientific_name" = $2, "care" = $3, "soil_type" = $4, "water" = $5
+  WHERE "id" = $6 AND "user_id" = $7
   `;
 
-  const values = [plant_name, scientific_name, care, soil_type, water, nextWaterDate, plantID, userID];
+  const values = [plant_name, scientific_name, care, soil_type, water, plantID, userID];
 
   pool.query(query, values)
   .then(() => {

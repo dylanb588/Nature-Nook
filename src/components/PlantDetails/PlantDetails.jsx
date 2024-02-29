@@ -18,53 +18,11 @@ function PlantDetails() {
     const plants = useSelector((store) => store.selectedPlant);
     const plant = plants[0];
     const { id } = useParams();
-    const [countdown, setCountdown] = useState(() => {
-        // Try to retrieve countdown value from local storage
-        const storedCountdown = localStorage.getItem('countdown');
-        return storedCountdown ? parseInt(storedCountdown, 10) : plant?.water || 0;
-    });
-    const [backgroundColor, setBackgroundColor] = useState('#C4D5C5');
-
-    // Pulls the single plant out of the array
 
     // Gets the single plants's info.
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_PLANT', payload: id })
     }, [id]);
-
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (countdown > 0) {
-                setCountdown(countdown - 1);
-            }
-        }, 2000); // 24 hours in milliseconds
-        localStorage.setItem('countdown', countdown);
-        
-
-        // 86400000
-        return () => clearInterval(interval);
-    }, [countdown]);
-
-    useEffect(() => {
-        if (plant) {
-            // Calculate the percentage of remaining days
-            const percentageRemaining = (countdown / plant.water) * 100;
-
-            // Update background color based on percentage remaining
-            if (percentageRemaining >= 70) {
-                setBackgroundColor('#C4D5C5'); // Green
-            } else if (percentageRemaining >= 30) {
-                setBackgroundColor('#FFD700'); // Yellow
-            } else {
-                setBackgroundColor('#FF6347'); // Red
-            }
-        }
-    }, [countdown, plant]);
-    
-    function resetCountdown() {
-        setCountdown(plant.water);
-    }
 
     function deletePlant(plantID) {
         Swal.fire({
@@ -95,13 +53,13 @@ function PlantDetails() {
         plant ? (
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <Card sx={{ maxWidth: 600, margin: 8, padding: 2, backgroundColor }}>
+                <Grid item xs={12} md={5}>
+                    <Card sx={{ maxWidth: 500, margin: 8, padding: 2, backgroundColor:'#989F7E'}}>
                         <CardContent>
                             <Typography variant="h3" gutterBottom>
                                 {plant.plant_name} Details
                             </Typography>
-                            <Stack direction="column" spacing={2}>
+                            <Stack direction="column" spacing={1}>
                                 <Typography variant="h4" component="h4">{plant.scientific_name}</Typography>
                                 <CardMedia
                                     component="img"
@@ -112,7 +70,6 @@ function PlantDetails() {
                                 <Typography variant="body1"><strong>Plant Care:</strong> {plant.care}</Typography>
                                 <Typography variant="body1"><strong>Soil Type:</strong> {plant.soil_type}</Typography>
                                 <Typography variant="body1"><strong>Watering:</strong> Water about every {plant.water} days</Typography>
-                                <Typography variant="body1">Next water in <strong>{countdown}</strong> days</Typography>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -127,18 +84,11 @@ function PlantDetails() {
                                 >
                                     Delete
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    color="success"
-                                    onClick={resetCountdown}
-                                >
-                                        Watered
-                                </Button>
                             </Stack>
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={6} sx={{ overflowY: 'auto'}}>
+                <Grid item xs={12} md={6}>
                     <Paper>
                         <Notes plant={plant}/>
                     </Paper>

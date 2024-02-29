@@ -34,7 +34,8 @@ function Notes(props) {
     }
 
     return(
-        <Container>
+        <Container sx={{width: 900}}>
+            <h3>Notes</h3>
             {notes?.length > 0 ? (
                 notes.filter((n) => n.plant_id === plantID).map(note => (
                     <div key={note.id}>
