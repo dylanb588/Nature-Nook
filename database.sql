@@ -20,14 +20,14 @@ CREATE TABLE "plant" (
     "care" TEXT NOT NULL,
     "soil_type" varchar(60),
     "water" integer NOT NULL,
-    "next_water_date" TIMESTAMP
 );
 
 CREATE TABLE "note" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INT REFERENCES "user",
     "plant_id" INT REFERENCES "plant",
-    "note" TEXT NOT NULL
+    "note" TEXT NOT NULL,
+    "posted" TIMESTAMP
 );
 
 CREATE TABLE "follower" (
