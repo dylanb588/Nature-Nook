@@ -10,12 +10,9 @@ function Search() {
     const [search, setSearch] = useState('');
     const dispatch = useDispatch();
 
-    console.log(loggedIn);
-
     useEffect(() => {
         dispatch({type: 'FETCH_USERS'})
-      }, []);
-    
+    }, []);
 
     return(
         <div className='search-container'>
