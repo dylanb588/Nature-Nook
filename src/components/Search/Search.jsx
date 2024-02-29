@@ -18,23 +18,27 @@ function Search() {
     
 
     return(
-        <div className='search'>
-            <h3>Search Users</h3>
+        <div className='search-container'>
+            <h3 className='search-title'>Search Users</h3>
             <input
                 type='text'
+                value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                className='search-input'
                 placeholder='Search Users'
             />
-            <ul style={{ listStyleType: 'none' }}>
+            <ul className='user-list'>
                 {users.filter((user) => {
                     // Filter out the logged-in user's name from the list
                     return (search.toLowerCase() === '' && user.id !== loggedIn.id) ||
                         (user.username.toLowerCase().includes(search) && user.id !== loggedIn.id);
                 }).map((user) => (
-                    <Link key={user.id} to={`/user/${user.id}`}>
-                        <Avatar src={user.profile_pic} alt={user.username} />
-                        <li>{user.username}</li>
-                    </Link>
+                    <li className='user-item' key={user.id}>
+                        <Link to={`/user/${user.id}`}>
+                            <Avatar src={user.profile_pic} alt={user.username} className='user-avatar' />
+                            <span className='user-name'>{user.username}</span>
+                        </Link>
+                    </li>
                 ))}
             </ul>
         </div>
