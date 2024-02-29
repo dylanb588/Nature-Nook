@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextField, Button } from '@mui/material';
 
+import './Notes.css'
+
 
 function Notes(props) {
     const notes = useSelector(store => store.notes);
@@ -49,7 +51,7 @@ function Notes(props) {
     };
 
     return(
-        <Container sx={{width: 900}}>
+        <Container sx={{maxWidth: 900}}>
             <h3>Notes</h3>
             {notes?.length > 0 ? (
                 notes.filter((n) => n.plant_id === plantID).map(note => (
@@ -73,7 +75,7 @@ function Notes(props) {
                 label='Add new note'
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
-                style={{width: 800}}
+                sx={{ width: '100%', marginBottom: 2 }}
                 variant='filled'
                 required
             />

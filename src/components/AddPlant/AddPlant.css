@@ -1,0 +1,19 @@
+.addPlantContainer {
+    position: relative;
+  }
+  
+  .addPlantCard {
+    width: 600px;
+    margin: auto;
+    padding: 2px;
+  }
+  
+  .addPlantImage {
+    position: absolute;
+    bottom: -50px; /* Adjust as needed */
+    margin-left: 400px;
+    left: 0;
+    z-index: -1;
+    height: 800px;
+    width: 800px;
+  }

@@ -1,0 +1,11 @@
+.container {
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Media query for responsiveness */
+  @media screen and (max-width: 600px) {
+    .container {
+      max-width: 100%;
+    }
+  }
