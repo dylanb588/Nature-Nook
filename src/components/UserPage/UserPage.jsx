@@ -6,8 +6,6 @@ import './UserPage.css'
 
 import Stack from '@mui/material/Stack';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
-
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -40,7 +38,7 @@ function UserPage() {
               />
               </Link>
               <CardContent>
-                <Typography gutterBottom variant="h4" component="div" align='center'>
+                <Typography gutterBottom variant="h4" component="div" align='center' fontFamily={'Antic Didone'}>
                   {plant.plant_name}
                 </Typography>
               </CardContent>
