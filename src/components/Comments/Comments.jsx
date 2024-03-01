@@ -78,7 +78,7 @@ function Comments(props) {
                     fullWidth
                     required
                 />
-                <Button onClick={addComment} variant="contained" color="success" style={{ marginLeft: '10px' }}>Add Comment</Button>
+                <Button onClick={addComment} variant="contained" color="success" sx={{ marginLeft: '10px', height: '40px', fontSize: '12px' }} style={{ marginLeft: '10px' }}>Add Comment</Button>
             </Box>
         </Container>
     )
