@@ -37,20 +37,21 @@ function MessageComments(props) {
     return (
         message ? (
             <>
-                <Card key={message.id}>
-                <CardContent>
-                    <Typography variant="body1">
-                        {message.message}
-                    </Typography>
-                    <Typography variant="caption" color="textSecondary">
-                        Posted at: {formatDate(message.posted_at)}
-                    </Typography>
-                </CardContent>
-            </Card>
-            <Comments message={message} user={user}/>
+                <Card key={message.id} style={{ margin: '20px auto', maxWidth: '800px' }}>
+                    <CardContent>
+                        <Typography variant="body1">
+                            {message.message}
+                        </Typography>
+                        <Typography variant="caption" color="textSecondary">
+                            Posted at: {formatDate(message.posted_at)}
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <h3 align='center'>Comments</h3>
+                <Comments message={message} user={user} />
             </>
         ) : (
-            <CircularProgress color="success" align='center'/>
+            <CircularProgress color="success" style={{ margin: '20px auto', display: 'block' }} />
         )
     );
 }

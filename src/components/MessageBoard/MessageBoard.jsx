@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Container, Typography } from '@mui/material';
 import { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Grid from '@mui/material/Grid';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -50,35 +51,40 @@ function MessageBoard(props){
         return `${month}/${day}/${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
     };
 
-    return(
-        <div>
-        {messages.map((message) => ( 
-            <Card key={message.id}>
-                <CardContent>
-                    <Typography onClick={() => goToMessageComments(message)} variant="body1">
-                        {message.message}
-                    </Typography>
-                    <Typography variant="caption" color="textSecondary">
-                        Posted by: {message.username} at {formatDate(message.posted_at)}
-                    </Typography>
-                    {userID === message.posted_by && (
-                        <IconButton onClick={() => deleteMessage(message.id)} aria-label="delete">
-                            <DeleteIcon />
-                        </IconButton>
-                    )}
-                </CardContent>
-            </Card>
-        ))}
-        <TextField 
-            name='message'
-            label='Add a New Message'
-            value={newMessage}
-            onChange={(event) => setNewMessage(event.target.value)}
-            style={{width: 1000}}
-            required
-        />
-        <Button onClick={() => addMessage()}>Post Message</Button>
-    </div>
+    return (
+        <Container maxWidth="md">
+            <Grid container spacing={2}>
+                {messages.map((message) => (
+                    <Grid item xs={12} key={message.id}>
+                        <Card>
+                            <CardContent>
+                                <Typography onClick={() => goToMessageComments(message)} variant="body1">
+                                    {message.message}
+                                </Typography>
+                                <Typography variant="caption" color="textSecondary">
+                                    Posted by: {message.username} at {formatDate(message.posted_at)}
+                                </Typography>
+                                {userID === message.posted_by && (
+                                    <IconButton onClick={() => deleteMessage(message.id)} aria-label="delete">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                )}
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+            <TextField
+                fullWidth
+                name='message'
+                label='Add a New Message'
+                value={newMessage}
+                onChange={(event) => setNewMessage(event.target.value)}
+                variant="outlined"
+                style={{ marginTop: '20px', backgroundColor: '#f0f0f0'}}
+            />
+            <Button color='success' variant="contained" onClick={addMessage} style={{ marginTop: '10px' }}>Post Message</Button>
+        </Container>
     )
 }
 

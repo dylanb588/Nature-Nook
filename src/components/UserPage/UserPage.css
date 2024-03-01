@@ -11,13 +11,13 @@
   
   .vine {
     flex: 1; /* Make the image grow to fill the available space */
-    max-width: 50%; /* Limit the maximum width of the image to half of the container width */
+    max-width: 45%; /* Limit the maximum width of the image to half of the container width */
     transform: scaleX(-1); /* Flip the image horizontally */
   }
   
   .image {
     flex: 1; /* Make the image grow to fill the available space */
-    max-width: 50%; /* Limit the maximum width of the image to half of the container width */
+    max-width: 45%; /* Limit the maximum width of the image to half of the container width */
   }
   
   .welcome {

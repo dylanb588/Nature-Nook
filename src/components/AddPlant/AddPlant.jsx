@@ -48,7 +48,7 @@ function AddPlant() {
 
   return (
     <div className='addPlantContainer'>
-      <Card className='addPlantCard' sx={{ width: 600, margin: 'auto', padding: 2 }}>
+      <Card className='addPlantCard' sx={{ width: 600, margin: 'auto', padding: 2,}}>
         <CardContent>
           <Typography variant="h3" gutterBottom>
             Add New Plant
@@ -98,7 +98,7 @@ function AddPlant() {
             onChange={(event) => setPlantInfo({...plantInfo, water: event.target.value})}
             required
             />
-          <Button type="submit">Upload Plant Info</Button>
+          <Button variant="contained" color='success' type="submit">Upload Plant Info</Button>
           </Stack>
         </form>
         </CardContent>

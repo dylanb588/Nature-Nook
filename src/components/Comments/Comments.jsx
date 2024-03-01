@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextField, Button } from '@mui/material';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, Typography, Box } from '@mui/material';
 
 function Comments(props) {
     const comments = useSelector((store) => store.comment);
@@ -46,38 +46,40 @@ function Comments(props) {
         return `${month}/${day}/${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
     };
     
-    return(
+    return (
         <Container>
             {comments?.length > 0 ? (
                 comments.filter((c) => c.message_id === messageID).map(comment => (
-                    <Card key={comment.id} sx={{ width: 600 }}>
-                <CardContent>
-                    <Typography variant="body1">
-                        {comment.comment}
-                    </Typography>
-                    <Typography variant="caption" color="textSecondary">
-                        Posted by: {comment.username} at {formatDate(comment.posted_time)}
-                    </Typography>
-                    {userID === comment.author && (
-                        <IconButton onClick={() => deleteComment(comment.id)} aria-label="delete">
-                            <DeleteIcon />
-                        </IconButton>
-                    )}
-                </CardContent>
-            </Card>
+                    <Card key={comment.id} sx={{ width: 700, margin: '10px auto' }}>
+                        <CardContent>
+                            <Typography variant="body1">
+                                {comment.comment}
+                            </Typography>
+                            <Typography variant="caption" color="textSecondary">
+                                Posted by: {comment.username} at {formatDate(comment.posted_time)}
+                            </Typography>
+                            {userID === comment.author && (
+                                <IconButton onClick={() => deleteComment(comment.id)} aria-label="delete">
+                                    <DeleteIcon />
+                                </IconButton>
+                            )}
+                        </CardContent>
+                    </Card>
                 ))
             ) : (
-                <h3>No Comments</h3>
+                <Typography variant="h6" align="center">No Comments</Typography>
             )}
-            <TextField
-                name='comment'
-                label='Add a comment'
-                value={comment}
-                onChange={(event) => setComment(event.target.value)}
-                style={{width: 800}}
-                required
-            />
-            <Button onClick={() => addComment()}>Add Comment</Button>
+            <Box sx={{ display: 'flex', alignItems: 'center', width: 600, margin: 'auto', backgroundColor: '#f0f0f0', padding: '10px' }}>
+                <TextField
+                    name='comment'
+                    label='Add a comment'
+                    value={comment}
+                    onChange={(event) => setComment(event.target.value)}
+                    fullWidth
+                    required
+                />
+                <Button onClick={addComment} variant="contained" color="success" style={{ marginLeft: '10px' }}>Add Comment</Button>
+            </Box>
         </Container>
     )
 }
