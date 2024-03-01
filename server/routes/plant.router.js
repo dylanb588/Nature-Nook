@@ -31,8 +31,10 @@ router.get('/:userID', rejectUnauthenticated, (req, res) => {
   const { userID } = req.params;
   
   const query = `
-    SELECT * FROM "plant"
-    WHERE "user_id" = $1
+  SELECT plant.*, "user"."username" 
+  FROM plant 
+  JOIN "user" ON plant.user_id = "user".id 
+  WHERE plant.user_id = $1;  
   `;
 
   pool.query(query, [userID])

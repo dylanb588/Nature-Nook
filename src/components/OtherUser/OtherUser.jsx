@@ -12,6 +12,8 @@ function OtherUser() {
     const dispatch = useDispatch();
     const plants = useSelector((store) => store.plants);
     const { userID } = useParams();
+    const username = plants.length > 0 ? plants[0].username : '';
+    console.log(username);
 
     useEffect(() => {
         dispatch({type: 'FETCH_OTHER_PLANTS', payload: userID})
@@ -20,6 +22,11 @@ function OtherUser() {
 
     return (
     <main>
+        <div className="welcomeContainer">
+            <img className='vine' src='/vine-146978_640.png' />
+            <h2 className='welcome' align='center'>Welcome to {username}'s Nature Nook!</h2>
+            <img className='image' src='/vine-146978_640.png' />
+        </div>
         <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
             {plants?.length > 0 ? (
             plants.map(plant => (
