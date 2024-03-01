@@ -61,8 +61,10 @@ function Notes(props) {
     };
 
     return(
-        <Container sx={{maxWidth: 900}}>
-            <h3>Notes</h3>
+        <Container sx={{maxWidth: 900, marginTop: 8}}>
+            <Typography align='center' variant='h3'>
+                Notes
+            </Typography>
             {notes?.length > 0 ? (
                 notes.filter((n) => n.plant_id === plantID).map(note => (
                     <Container>
