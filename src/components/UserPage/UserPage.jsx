@@ -48,7 +48,23 @@ function UserPage() {
           </Card>
       ))
       ) : (
-        <CircularProgress color="success" align="center"/>
+        <Card sx={{ width: 300 }} style={{backgroundColor: "#989F7E"}}>
+            <CardActionArea>
+              <Link to={'/addPlant'}>
+              <CardMedia
+                component="img"
+                height="300"
+                image='/nature-nook-high-resolution-logo.png'
+                alt='Nature Nook Logo'
+              />
+              </Link>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" align='center'>
+                  Click me to add a plant!
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         )}
       </Stack>
       <br />
