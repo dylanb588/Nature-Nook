@@ -39,7 +39,7 @@ function OtherUser() {
                     alt={plant.plant_name}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h4" component="div" align='center'>
                     {plant.plant_name}
                     </Typography>
                 </CardContent>

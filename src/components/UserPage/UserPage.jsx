@@ -40,7 +40,7 @@ function UserPage() {
               />
               </Link>
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" align='center'>
+                <Typography gutterBottom variant="h4" component="div" align='center'>
                   {plant.plant_name}
                 </Typography>
               </CardContent>

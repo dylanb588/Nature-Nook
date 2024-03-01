@@ -52,15 +52,15 @@ function PlantDetails() {
     return (
         plant ? (
             <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2}>
-                <Grid item xs={12} md={5}>
-                    <Card sx={{ width: 460, margin: 8, padding: 2, backgroundColor:'#ACB4A3'}}>
+                <Grid container spacing={2} wrap="wrap">
+                <Grid item xs={12} md={6}>
+                    <Card sx={{ width: 640, margin: 8, padding: 2, backgroundColor:'#ACB4A3'}}>
                         <CardContent>
-                            <Typography variant="h3" gutterBottom>
+                            <Typography align='center' variant="h3" gutterBottom>
                                 {plant.plant_name} Details
                             </Typography>
                             <Stack direction="column" spacing={1}>
-                                <Typography variant="h4" component="h4">{plant.scientific_name}</Typography>
+                                <Typography align='center' variant="h4" component="h4">{plant.scientific_name}</Typography>
                                 <CardMedia
                                     component="img"
                                     height="580"
@@ -88,8 +88,8 @@ function PlantDetails() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} sm={4} md={6} >
-                    <Paper>
+                <Grid item xs={12} sm={12} md={6} >
+                    <Paper sx={{marginRight: 5}}>
                         <Notes plant={plant}/>
                     </Paper>
                 </Grid>
