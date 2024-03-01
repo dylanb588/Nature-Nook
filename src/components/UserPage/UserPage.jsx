@@ -29,7 +29,7 @@ function UserPage() {
       <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
           plants.map(plant => (
-            <Card key={plant.id} sx={{ width: 300 }} style={{backgroundColor: "#989F7E"}}>
+            <Card key={plant.id} sx={{ width: 300 }} style={{backgroundColor: "#ACB4A3"}}>
             <CardActionArea>
               <Link to={`/plantdetails/${plant.id}`}>
               <CardMedia

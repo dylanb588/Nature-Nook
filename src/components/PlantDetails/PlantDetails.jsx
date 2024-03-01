@@ -54,7 +54,7 @@ function PlantDetails() {
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                 <Grid item xs={12} md={5}>
-                    <Card sx={{ width: 430, margin: 8, padding: 2, backgroundColor:'#989F7E'}}>
+                    <Card sx={{ width: 460, margin: 8, padding: 2, backgroundColor:'#ACB4A3'}}>
                         <CardContent>
                             <Typography variant="h3" gutterBottom>
                                 {plant.plant_name} Details
@@ -88,7 +88,7 @@ function PlantDetails() {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={6} >
+                <Grid item xs={12} sm={4} md={6} >
                     <Paper>
                         <Notes plant={plant}/>
                     </Paper>

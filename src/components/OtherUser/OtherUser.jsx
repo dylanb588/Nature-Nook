@@ -30,7 +30,7 @@ function OtherUser() {
         <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
             {plants?.length > 0 ? (
             plants.map(plant => (
-            <Card key={plant.id} sx={{ width: 300, backgroundColor: "#989F7E" }}>
+            <Card key={plant.id} sx={{ width: 300, backgroundColor: "#ACB4A3" }}>
                 <CardActionArea>
                 <CardMedia
                     component="img"
