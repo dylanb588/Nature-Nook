@@ -30,6 +30,8 @@
     padding: 10px;
     border-bottom: 1px solid #eee;
     transition: background-color 0.3s ease;
+    list-style: none;
+    width: 100%;
 }
 
 .user-item:hover {
@@ -41,6 +43,9 @@
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+    background-color: #528265; /* Set the background color */
+    background-size: cover; /* Ensure the background image covers the entire circle */
+    background-position: center; /* Center the background image */
 }
 
 .user-name {

@@ -33,12 +33,12 @@ function Search() {
                     return (searchLowerCase === '' && user.id !== loggedIn.id) ||
                     (usernameLowerCase.includes(searchLowerCase) && user.id !== loggedIn.id);
                         }).map((user) => (
-                        <li className='user-item' key={user.id}>
-                            <Link to={`/user/${user.id}`}>
-                                <Avatar src={user.profile_pic} alt={user.username} className='user-avatar' />
-                                <span className='user-name'>{user.username}</span>
+                            <Link to={`/user/${user.id}`} style={{ textDecoration: 'none' }}>
+                                <li className='user-item' key={user.id}>
+                                    <Avatar src={user.profile_pic} alt={user.username} className='user-avatar' />
+                                    <span className='user-name'>{user.username}</span>
+                                </li>
                             </Link>
-                        </li>
                 ))}
             </ul>
         </div>
