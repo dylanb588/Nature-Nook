@@ -5,3 +5,7 @@ strong {
   .careInfo {
     font-size: 18px;
   }
+
+  .plantName {
+    font-family: 'Antic Didone';
+  }

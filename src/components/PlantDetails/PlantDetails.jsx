@@ -57,11 +57,11 @@ function PlantDetails() {
                 <Grid item xs={12} md={6}>
                     <Card sx={{ width: { xs: '55%', sm: '60%', md: '75%' }, margin: 4, padding: 3, backgroundColor: '#ACB4A3', marginTop: 8 }}>
                         <CardContent>
-                            <Typography align='center' variant="h3" gutterBottom>
+                            <Typography className="plantName" align='center' variant="h3" gutterBottom>
                                 {plant.plant_name} Details
                             </Typography>
                             <Stack direction="column" spacing={1}>
-                                <Typography align='center' variant="h4" component="h4">{plant.scientific_name}</Typography>
+                                <Typography className="plantName" align='center' variant="h4" component="h4">{plant.scientific_name}</Typography>
                                 <CardMedia
                                     component="img"
                                     height="580"

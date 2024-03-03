@@ -62,7 +62,7 @@ function Notes(props) {
 
     return(
         <Container sx={{maxWidth: 900, marginTop: 8}}>
-            <Typography align='center' variant='h3'>
+            <Typography style={{fontFamily: 'Antic Didone'}} align='center' variant='h3'>
                 Notes
             </Typography>
             {notes?.length > 0 ? (
