@@ -24,7 +24,7 @@ function UserPage() {
         <h2 className='welcome' align='center'>Welcome to your Nature Nook, {user.username}!</h2>
         <img className='image' src='/vine-146978_640.png' />
       </div>
-      <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
+      <Stack marginLeft={7} direction="row" spacing={5} useFlexGap flexWrap="wrap">
         {plants?.length > 0 ? (
           plants.map(plant => (
             <Card key={plant.id} sx={{ width: 300 }} style={{backgroundColor: "#ACB4A3"}}>
@@ -66,7 +66,9 @@ function UserPage() {
         )}
       </Stack>
       <br />
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <LogOutButton className="btn" />
+      </div>
     </main>
   );
 }
