@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 import Notes from "../Notes/Notes";
+import './PlantDetails.css'
 
 import { Typography, Button, Card, CardContent, CardMedia, Stack } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -54,7 +55,7 @@ function PlantDetails() {
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2} wrap="wrap">
                 <Grid item xs={12} md={6}>
-                    <Card sx={{ width: { xs: '55%', sm: '60%', md: '75%' }, margin: 4, padding: 3, backgroundColor: '#ACB4A3' }}>
+                    <Card sx={{ width: { xs: '55%', sm: '60%', md: '75%' }, margin: 4, padding: 3, backgroundColor: '#ACB4A3', marginTop: 8 }}>
                         <CardContent>
                             <Typography align='center' variant="h3" gutterBottom>
                                 {plant.plant_name} Details
@@ -67,9 +68,9 @@ function PlantDetails() {
                                     image={plant.plant_image}
                                     alt={plant.plant_name}
                                 />
-                                <Typography variant="body1"><strong>Plant Care:</strong> {plant.care}</Typography>
-                                <Typography variant="body1"><strong>Soil Type:</strong> {plant.soil_type}</Typography>
-                                <Typography variant="body1"><strong>Watering:</strong> Water about every {plant.water} days</Typography>
+                                <Typography className="careInfo" variant="body1"><strong>Plant Care:</strong> {plant.care}</Typography>
+                                <Typography className="careInfo" variant="body1"><strong>Soil Type:</strong> {plant.soil_type}</Typography>
+                                <Typography className="careInfo" variant="body1"><strong>Watering:</strong> Water about every {plant.water} days</Typography>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -89,7 +90,7 @@ function PlantDetails() {
                     </Card>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} >
-                    <Paper sx={{marginRight: 5}}>
+                    <Paper sx={{marginRight: 5, paddingBottom: 2, marginTop: 8}}>
                         <Notes plant={plant}/>
                     </Paper>
                 </Grid>

@@ -92,7 +92,7 @@ function Notes(props) {
                     variant='filled'
                     required
                 />
-                <Button type='submit' >Add Note</Button>
+                <Button variant="contained" color='success' type='submit' >Add Note</Button>
             </form>
         </Container>
     )
