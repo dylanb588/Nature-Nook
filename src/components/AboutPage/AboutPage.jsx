@@ -1,15 +1,18 @@
 import React from 'react';
-
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
+import './AboutPage.css'; // Import CSS file for styling
 
 function AboutPage() {
   return (
-    <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
+    <div className="about-container">
+      <div className="about-content">
+        <h2 className="about-title">About Us</h2>
+        <p>Nature Nook</p>
+        <p>Here at Nature Nook, we are passionate about plants and fostering a vibrant community of plant lovers.</p>
+        <p>Explore our app, connect with fellow enthusiasts, and let's grow together!</p>
+        <div className="contact-info">
+          <h3>Contact Us</h3>
+          <p>If you have any bug reports, feature ideas, or just want to say hello, feel free to get in touch with me at <a href="mailto:dylanbrown588@gmail.com">dylanbrown588@gmail.com</a>.</p>
+        </div>
       </div>
     </div>
   );
