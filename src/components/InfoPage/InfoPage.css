@@ -1,0 +1,27 @@
+.info-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-title {
+    text-align: center;
+    color: #3e6b48;
+    font-family: 'Antic Didone';
+    font-size: 3rem;
+  }
+  
+  .info-section {
+    margin-top: 30px;
+    font-size: 1rem;
+  }
+  
+  .info-subtitle {
+    color: #3e6b48;
+    text-align: center;
+    font-family: 'Antic Didone';
+    font-size: 2rem;
+  }
