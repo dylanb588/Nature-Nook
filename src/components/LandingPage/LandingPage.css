@@ -78,3 +78,13 @@ Grid
   flex-basis: 100%;
   max-width: 100%;
 }
+
+.landContent {
+  font-size: 20px;
+}
+
+.landTitle {
+  font-size: 40px;
+  font-family: 'Antic Didone';
+  color: #528265;
+}
