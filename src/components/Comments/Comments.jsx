@@ -52,10 +52,10 @@ function Comments(props) {
                 comments.filter((c) => c.message_id === messageID).map(comment => (
                     <Card key={comment.id} sx={{ width: 700, margin: '10px auto' }}>
                         <CardContent>
-                            <Typography variant="body1">
+                            <Typography style={{fontSize: 20}} variant="body1">
                                 {comment.comment}
                             </Typography>
-                            <Typography variant="caption" color="textSecondary">
+                            <Typography style={{fontSize: 16}} variant="caption" color="textSecondary">
                                 Posted by: {comment.username} at {formatDate(comment.posted_time)}
                             </Typography>
                             {userID === comment.author && (

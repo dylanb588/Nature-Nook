@@ -39,10 +39,10 @@ function MessageComments(props) {
             <>
                 <Card key={message.id} style={{ margin: '20px auto', maxWidth: '800px' }}>
                     <CardContent>
-                        <Typography variant="body1">
+                        <Typography style={{fontSize: 20}} variant="body1">
                             {message.message}
                         </Typography>
-                        <Typography variant="caption" color="textSecondary">
+                        <Typography style={{fontSize: 16}} variant="caption" color="textSecondary">
                             Posted at: {formatDate(message.posted_at)}
                         </Typography>
                     </CardContent>

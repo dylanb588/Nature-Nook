@@ -69,8 +69,8 @@ function Notes(props) {
                 notes.filter((n) => n.plant_id === plantID).map(note => (
                     <Container>
                     <div key={note.id}>
-                        <p>{note.note}</p>
-                        <Typography variant="caption" color="textSecondary">
+                        <p style={{fontSize: 20}} >{note.note}</p>
+                        <Typography style={{fontSize: 16}} variant="caption" color="textSecondary">
                         Posted at: {formatDate(note.posted)}
                         </Typography>
                         <IconButton onClick={() => deleteNote(note.id)} aria-label="delete">

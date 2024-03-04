@@ -58,10 +58,10 @@ function MessageBoard(props){
                     <Grid item xs={12} key={message.id}>
                         <Card>
                             <CardContent>
-                                <Typography onClick={() => goToMessageComments(message)} variant="body1">
+                                <Typography style={{fontSize: 20}} onClick={() => goToMessageComments(message)} variant="body1">
                                     {message.message}
                                 </Typography>
-                                <Typography variant="caption" color="textSecondary">
+                                <Typography style={{fontSize: 16}} variant="caption" color="textSecondary">
                                     Posted by: {message.username} at {formatDate(message.posted_at)}
                                 </Typography>
                                 {userID === message.posted_by && (
