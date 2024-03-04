@@ -57,20 +57,20 @@ function PlantDetails() {
                 <Grid item xs={12} md={6}>
                     <Card sx={{ width: { xs: '55%', sm: '60%', md: '75%' }, margin: 4, padding: 3, backgroundColor: '#ACB4A3', marginTop: 8 }}>
                         <CardContent>
-                            <Typography className="plantName" align='center' variant="h3" gutterBottom>
+                            <Typography style={{fontFamily: 'Antic Didone'}} align='center' variant="h3" gutterBottom>
                                 {plant.plant_name} Details
                             </Typography>
                             <Stack direction="column" spacing={1}>
-                                <Typography className="plantName" align='center' variant="h4" component="h4">{plant.scientific_name}</Typography>
+                                <Typography style={{fontFamily: 'Antic Didone'}} align='center' variant="h4" component="h4">{plant.scientific_name}</Typography>
                                 <CardMedia
                                     component="img"
                                     height="580"
                                     image={plant.plant_image}
                                     alt={plant.plant_name}
                                 />
-                                <Typography className="careInfo" variant="body1"><strong>Plant Care:</strong> {plant.care}</Typography>
-                                <Typography className="careInfo" variant="body1"><strong>Soil Type:</strong> {plant.soil_type}</Typography>
-                                <Typography className="careInfo" variant="body1"><strong>Watering:</strong> Water about every {plant.water} days</Typography>
+                                <Typography style={{fontSize: 22}}  variant="body1"><strong>Plant Care:</strong> {plant.care}</Typography>
+                                <Typography style={{fontSize: 22}}  variant="body1"><strong>Soil Type:</strong> {plant.soil_type}</Typography>
+                                <Typography style={{fontSize: 22}}  variant="body1"><strong>Watering:</strong> Water about every {plant.water} days</Typography>
                                 <Button
                                     variant="contained"
                                     color="primary"

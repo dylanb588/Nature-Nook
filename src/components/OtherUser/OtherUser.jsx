@@ -27,7 +27,7 @@ function OtherUser() {
             <h2 className='welcome' align='center'>Welcome to {username}'s Nature Nook!</h2>
             <img className='image' src='/vine-146978_640.png' />
         </div>
-        <Stack direction="row" spacing={3} useFlexGap flexWrap="wrap">
+        <Stack marginLeft={7} direction="row" spacing={5} useFlexGap flexWrap="wrap">
             {plants?.length > 0 ? (
             plants.map(plant => (
             <Card key={plant.id} sx={{ width: 300, backgroundColor: "#ACB4A3" }}>
