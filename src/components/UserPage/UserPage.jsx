@@ -28,7 +28,7 @@ function UserPage() {
       {plants === undefined ? (
         <CircularProgress color="success" />
       ) : plants.length === 0 ? (
-        <Card sx={{ width: 300 }} style={{backgroundColor: "#989F7E"}}>
+        <Card sx={{ width: 300, marginLeft: 7 }} style={{backgroundColor: "#989F7E"}}>
           <CardActionArea>
             <Link to={'/addPlant'}>
               <CardMedia
